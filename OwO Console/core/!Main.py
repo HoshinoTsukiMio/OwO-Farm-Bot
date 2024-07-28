@@ -18,7 +18,7 @@ current_dir = os.getcwd()
 # Join the current directory with the filename
 file_config = os.path.join(current_dir, 'data\\setting_config.json')
 file_cache = os.path.join(current_dir, 'data\\cache.json')
-file_update = os.path.join(current_dir, 'core\\update.py')
+file_update = os.path.join(current_dir, 'core\\!Update.py')
 #Call cfg.json file 
 with open(file_config, 'r', encoding='utf-8') as a:
     cfgs = json.load(a)
