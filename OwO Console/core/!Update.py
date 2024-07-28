@@ -84,7 +84,7 @@ config_setting = {
     "settings": {
         "prefix": prefix,
         "bot_prefix": bot_prefix,
-        "slash_command": slash_command
+        "slash_command": slash_command,
         "owo": sayowo,
         "pray": pray,
         "curse": curse,
