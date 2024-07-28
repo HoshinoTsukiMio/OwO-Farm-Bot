@@ -19,6 +19,7 @@
 -   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.
 -   Discord may restart as a result of discord rpc overload.
 -   It can detect virus due to captcha(ban) bypasser please turn off your antivirus(not really).
+-   Slash command '/' still in beta mode cant be know does it work well
 
 ## 👑・Features
 
