@@ -657,17 +657,17 @@ def dailycount(userid):
     base_datetime = datetime.datetime.combine(day_base, base_time)
     base_datetime_utc = base_datetime.replace(tzinfo=pytz.utc)
     now_utc = datetime.datetime.now(pytz.utc)
-    if (base_datetime_utc < now_utc):
+    if ((base_datetime_utc < now_utc) and (data[userid]["daily"] == "done")):
         data[userid]["daily"] = "ready"
         with open(file_cache, "w", encoding='utf-8') as s:
             json.dump(data, s, indent=4)
             s.close()
             dailycheckers = "ready"
-        return dailycheckers
+    elif data[userid]["daily"] == "ready":
+        dailycheckers = "ready"
     else:
         dailycheckers = "done"
-        return dailycheckers
-
+    return dailycheckers
 def checklist(token, tokentype, channelid, userid):
     if dailycount(userid) == "ready":
         requests.post(
@@ -1465,12 +1465,14 @@ def timecount(userid):
     base_datetime = datetime.datetime.combine(day_base, base_time)
     base_datetime_utc = base_datetime.replace(tzinfo=pytz.utc)
     now_utc = datetime.datetime.now(pytz.utc)
-    if (base_datetime_utc < now_utc):
+    if ((base_datetime_utc < now_utc) and (data[userid]["quest"] == "done")):
         data[userid]["quest"] = "ready"
         with open(file_cache, "w", encoding='utf-8') as i:
             json.dump(data, i, indent=4)
             i.close()
             questcheckers = "ready"
+    elif data[userid]["quest"] == "ready":
+        questcheckers = "ready"
     else:
         questcheckers = "done"
 
@@ -1507,7 +1509,7 @@ def getquests(tokenst,tokenrd,useridst,channelid, tokentype):
                 with open(file_cache, "r", encoding='utf-8') as j:
                     data = json.load(j)
                     j.close()
-                now_utc = datetime.datetime.now(pytz.utc)
+                now_utc = datetime.datetime.now(pytz.utc) + datetime.timedelta(days=1)
                 data[useridst]["day_quest"] = now_utc.strftime("%Y-%m-%d")
                 data[useridst]["quest"] = "done"
                 with open(file_cache, "w", encoding='utf-8') as k:
@@ -1639,13 +1641,13 @@ def bot_main():
                     time.sleep(5)
                     exit(0)
             else:
-                print(blue(f"[Main Token] User:{body["username"]}{body["discriminator"]}"))
+                print(blue(f"[Main  Token] User:{body["username"]}{body["discriminator"]}"))
                 checklist(main_token, "Main Token", main_channelid, main_id)
                 print(green("Main Token ✅"))
     except (KeyError, json.JSONDecodeError) as e:
             print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-                magenta("[Main Token]") +
+                magenta("[Main  Token]") +
                 red(f"Error while checking Main Token! ⚠️")
             )
 #========================================================================================================================
