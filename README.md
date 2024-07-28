@@ -5,7 +5,7 @@
 
 [❗・Important](#important)<br>
 [👑・Features](#features)<br>
-[⚙・data.json example](#configjson-example)<br>
+[⚙・setting_config.json example](#configjson-example)<br>
 [💎・Get Token](#get-token)<br>
 [📍・OwO DM channel id](#owo-dm-channel-id)<br>
 [⚠️・Captcha Alert](#captcha-alert)<br>
@@ -50,9 +50,10 @@
     "settings": {
         "prefix": "owo", prefix for owo you set in your server defaul is owo
         "bot_prefix": "! or any prefix this use to run bot like !run, !reset, !stop",
+        "slash_command": true, turn on or off slsh command mode
         "sayowo": "true or false",
-        "pray": "true or false, main for pray to main or extra for pray to extra",
-        "curse": "true or false,  main for curse to main or extra for curse to extra",
+        "pray": "true or false",
+        "curse": "true or false",
         "hunt": "true or false",
         "battle": "true or false",
         "autoquest": "true or false",
@@ -146,8 +147,8 @@ m)
 ## 🔗・Required Links
 
 [Python](https://www.python.org/downloads/)<br>
-[Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)<br>
-[Farm Bot Zip File](https://github.com/HoshinoTsukiMio/OwO-farm-bot/archive/refs/heads/Main.zip)
+[Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)<br> not really need
+[Farm Bot Zip File]()
 
 ## 🎈・Usage
 
