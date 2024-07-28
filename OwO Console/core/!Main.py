@@ -1916,7 +1916,7 @@ def main_account():
 def extra_account():
     global etoken
     if extratokencheck:
-        bot_extra_thread = threading.Thread(target=bot_extra, args=(extra_id))
+        bot_extra_thread = threading.Thread(target=bot_extra)
         bot_extra_thread.start()
         time.sleep(10)
         if etoken:
