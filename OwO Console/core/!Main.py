@@ -302,7 +302,7 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
                     },
                     "attachments": []
                 },
-                "nonce": "1265626827611701248",
+                "nonce": nonce(),
                 "analytics_location": "slash_ui"},
         )
         pass
@@ -365,7 +365,7 @@ def bot_battle(token, timebattle, tokentype, channelid, session_id):
                 },
                 "attachments": []
             },
-            "nonce": "1265633240115314688",
+            "nonce": nonce(),
             "analytics_location": "slash_ui"
         },
     )
