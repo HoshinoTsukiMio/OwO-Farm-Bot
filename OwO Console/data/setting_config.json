@@ -2,7 +2,7 @@
     "settings": {
         "prefix": "owo",
         "bot_prefix": "!",
-        "slash_command": true,
+        "slash_command": false,
         "sayowo": true,
         "pray": true,
         "curse": false,
