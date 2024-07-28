@@ -148,7 +148,7 @@ m)
 
 [Python](https://www.python.org/downloads/)<br>
 [Terminal (not really need)](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)<br>
-[Farm Bot Zip File]()
+[Farm Bot Zip File](https://codeload.github.com/HoshinoTsukiMio/OwO-Farm-Bot/zip/refs/heads/main)
 
 ## 🎈・Usage
 
