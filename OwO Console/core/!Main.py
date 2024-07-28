@@ -276,7 +276,7 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
             json={
                 "type": 2,
                 "application_id": "408785106942164992",
-                "guild_id": "1252048445955506249",
+                "guild_id": "1252929540792123412",
                 "channel_id": channelid,
                 "session_id": session_id,
                 "data": {
@@ -303,7 +303,8 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
                     "attachments": []
                 },
                 "nonce": nonce(),
-                "analytics_location": "slash_ui"},
+                "analytics_location": "slash_ui"
+            }
         )
         pass
     else:
@@ -329,44 +330,44 @@ def bot_battle(token, timebattle, tokentype, channelid, session_id):
             f"https://discord.com/api/v9/interactions",
             headers={"authorization": token},
             json = {
-            "type": 2,
-            "application_id": "408785106942164992",
-            "guild_id": "1252929540792123412",
-            "channel_id": channelid,
-            "session_id": session_id,
-            "data": {
-                "version": "953950078974963724",
-                "id": "953950078974963723",
-                "name": "battle",
-                "type": 1,
-                "options": [],
-                "application_command": {
-                    "id": "953950078974963723",
-                    "type": 1,
-                    "application_id": "408785106942164992",
+                "type": 2,
+                "application_id": "408785106942164992",
+                "guild_id": "1252929540792123412",
+                "channel_id": channelid,
+                "session_id": session_id,
+                "data": {
                     "version": "953950078974963724",
+                    "id": "953950078974963723",
                     "name": "battle",
-                    "description": "Fight with your team of animals!",
-                    "options": [
-                        {
-                            "type": 6,
-                            "name": "user",
-                            "description": "Fight a friend.",
-                            "description_localized": "Fight a friend.",
-                            "name_localized": "user"
-                        }
-                    ],
-                    "integration_types": [
-                        0
-                    ],
-                    "global_popularity_rank": 2,
-                    "description_localized": "Fight with your team of animals!",
-                    "name_localized": "battle"
+                    "type": 1,
+                    "options": [],
+                    "application_command": {
+                        "id": "953950078974963723",
+                        "type": 1,
+                        "application_id": "408785106942164992",
+                        "version": "953950078974963724",
+                        "name": "battle",
+                        "description": "Fight with your team of animals!",
+                        "options": [
+                            {
+                                "type": 6,
+                                "name": "user",
+                                "description": "Fight a friend.",
+                                "description_localized": "Fight a friend.",
+                                "name_localized": "user"
+                            }
+                        ],
+                        "integration_types": [
+                            0
+                        ],
+                        "global_popularity_rank": 2,
+                        "description_localized": "Fight with your team of animals!",
+                        "name_localized": "battle"
+                    },
+                    "attachments": []
                 },
-                "attachments": []
-            },
-            "nonce": nonce(),
-            "analytics_location": "slash_ui"
+                "nonce": nonce(),
+                "analytics_location": "slash_ui"
         },
     )
     else:
@@ -414,6 +415,7 @@ def bot_animals(token, tokentype, channelid, ani_type):
     animalcheck = False
     animaltypes = ""
     ranks = [
+        'all',
         "common",
         "uncommon",
         "rare",
@@ -430,8 +432,12 @@ def bot_animals(token, tokentype, channelid, ani_type):
         "hidden",
     ]
     for e in ranks:
-        if animaltype[e]:
-            animaltypes += f"{e} "
+        if e == "all":
+            animaltypes = "all"
+            break
+        else:
+            if animaltype[e]:
+                animaltypes += f"{e} "
 
     if ani_type == "sacrifice" or ani_type == "sell" or ani_type == "sac":
         animalcheck = True
@@ -1673,8 +1679,7 @@ def bot_extra():
     ▒█▄▄█ ▀░░▀ ▀▀▀ ▀▀▀ 　 ▀▀▀ ▀▀▀▀ ▀▀▀▀ █▀▀▀"""
 #========================================================================================================================
 def run__bot__hunt__and__battle(tokens, tokentypes, channelids):
-     session_id = generate_random_128bit_hex()
-     while True:
+    while True:
         global active_bot, battle_hunt
         if active_bot:
             timehunt = rantime()
@@ -1682,14 +1687,14 @@ def run__bot__hunt__and__battle(tokens, tokentypes, channelids):
             if (hunt):
                 time.sleep(timehunt)
                 timehunts = round(timehunt, 3)
-                bot_hunt(tokens, timehunts, tokentypes, channelids, session_id)
+                bot_hunt(tokens, timehunts, tokentypes, channelids, generate_random_128bit_hex())
                 if inventorycheck:
                     time.sleep(1)
                     checkinv(tokens, channelids, tokentypes)
             if (battle) and battle_hunt:
                 time.sleep(timebattle + 5)
                 timebattles = round(timebattle, 3)
-                bot_battle(tokens, timebattles, tokentypes, channelids, session_id) 
+                bot_battle(tokens, timebattles, tokentypes, channelids, generate_random_128bit_hex()) 
         else:
             break
         time.sleep(15)
