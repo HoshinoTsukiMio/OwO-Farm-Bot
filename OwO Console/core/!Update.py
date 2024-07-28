@@ -17,6 +17,7 @@ with open(file_config, 'r', encoding='utf-8') as a:
 setting               = cfgs["settings"]
 prefix                = setting['prefix']
 bot_prefix            = setting['bot_prefix']
+slash_command         = setting['slash_command']
 sayowo                = setting['sayowo']
 pray                  = setting['pray']
 curse                 = setting['curse']
@@ -83,6 +84,7 @@ config_setting = {
     "settings": {
         "prefix": prefix,
         "bot_prefix": bot_prefix,
+        "slash_command": slash_command
         "owo": sayowo,
         "pray": pray,
         "curse": curse,
