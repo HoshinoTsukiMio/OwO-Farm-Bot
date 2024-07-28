@@ -1,6 +1,0 @@
-@echo off
-echo Activating virtual environment...
-call !venv\Scripts\activate.bat
-echo Installing requirements...
-python -m pip install -r lib.lib
-echo Done!
