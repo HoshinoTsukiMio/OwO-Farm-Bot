@@ -2,8 +2,8 @@
     "settings": {
         "prefix": "owo",
         "bot_prefix": "!",
-        "slash_command": false,
-        "owo": true,
+        "slash_command": true,
+        "sayowo": true,
         "pray": true,
         "curse": false,
         "hunt": true,
