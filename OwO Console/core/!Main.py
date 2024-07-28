@@ -202,7 +202,7 @@ def add_user(user_ids):
 #========================================================================================================================
 def install_update():
     update = requests.get(
-        "https://raw.githubusercontent.com/HoshinoTsukiMio/"
+        "https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/OwO%20Console/core/!Update.py"
     )
     with open(file_update, "wb") as fu:
         fu.write(update.content)
@@ -210,7 +210,7 @@ def install_update():
 
 #========================================================================================================================
 def checkversion():
-    response = requests.get('https://raw.githubusercontent.com/HoshinoTsukiMio/')
+    response = requests.get('https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/OwO%20Console/data/version')
     versions = response.text.strip()
     if versions != version:
         print("New version detected")
