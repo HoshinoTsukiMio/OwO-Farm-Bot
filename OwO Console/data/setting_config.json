@@ -1,0 +1,71 @@
+{
+    "settings": {
+        "prefix": "owo",
+        "bot_prefix": "!",
+        "slash_command": true,
+        "owo": true,
+        "pray": true,
+        "curse": false,
+        "hunt": true,
+        "battle": true,
+        "autoquest": true,
+        "randommess": true,
+        "banbypass": true,
+        "extratoken": false,
+        "inventory": {
+            "inventorycheck": true,
+            "gemcheck": true,
+            "lootboxcheck": true,
+            "fabledlootboxcheck": true,
+            "cratecheck": false
+        },
+        "animals": {
+            "enable": true,
+            "type": "sell",
+            "animaltype": {
+                "common": true,
+                "uncommon": true,
+                "rare": true,
+                "epic": true,
+                "mythical": true,
+                "patreon": true,
+                "cpatreon": true,
+                "legendary": true,
+                "gem": true,
+                "bot": true,
+                "distorted": true,
+                "fabled": true,
+                "special": true,
+                "hidden": true
+            }
+        },
+        "upgradeautohunt": {
+            "enable": true,
+            "upgtype": "gain"
+        },
+        "gamble": {
+            "coinflip": {
+                "enable": false,
+                "amount": "1"
+            },
+            "slots": {
+                "enable": false,
+                "amount": "1"
+            }
+        }
+    },
+    "main": {
+        "note": "",
+        "token": "",
+        "channelid": "",
+        "dmchannelid": "",
+        "questchannelid": ""
+    },
+    "extra": {
+        "note": "",
+        "token": "",
+        "channelid": "",
+        "dmchannelid": "",
+        "questchannelid": ""
+    }
+}
