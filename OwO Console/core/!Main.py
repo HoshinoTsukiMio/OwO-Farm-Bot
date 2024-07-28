@@ -685,6 +685,7 @@ def checklist(token, tokentype, channelid, userid):
             magenta(f"[{tokentype}] ") +
             blue(f"Sending Checklist📜...")
         )
+        time.sleep(0.5)
         while True:
             response = requests.get(
                 f"https://discord.com/api/v9/channels/{channelid}/messages?limit=1",
@@ -694,7 +695,8 @@ def checklist(token, tokentype, channelid, userid):
                 body = response.json()
                 author = body[0]["author"]
                 id = author["id"]
-                if (id == "408785106942164992"):
+                if ((id == "408785106942164992") and
+                    ("Checklist" in body[0]["embeds"][0]["author"]["name"])):
                     embeds = body[0]["embeds"]
                     cont = embeds[0]["description"]
                     print(
@@ -737,6 +739,7 @@ def checklist(token, tokentype, channelid, userid):
                         magenta(f"[{tokentype}] ") +
                         red("Unable to get Checklist❗")
                     )
+            time.sleep(0.05)
 #========================================================================================================================
 def checkinv(token, channelid, tokentype):
     if gemcheck:
