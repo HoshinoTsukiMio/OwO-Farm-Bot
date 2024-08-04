@@ -1,7 +1,6 @@
-import json, math, random, os, time, hashlib, threading, multiprocessing, datetime, base64
+import json, math, random, os, time, hashlib, threading, multiprocessing, datetime, base64, json, math, random, os, time, hashlib, threading, datetime
 from file import phrases, actvar, gamblevar
 try:
-    import json, math, random, os, time, hashlib, threading, datetime
     import requests, psutil, pytz
     from blessed import Terminal
     from notifypy import Notify
@@ -183,14 +182,24 @@ def add_user(user_ids):
                 "id_2": "0000000000000000000000",
                 "id_3": "0000000000000000000000",
                 "id_4": "0000000000000000000000",
-                "id_5": "0000000000000000000000"
+                "id_5": "0000000000000000000000",
+                "id_6": "0000000000000000000000",
+                "id_7": "0000000000000000000000",
+                "id_8": "0000000000000000000000",
+                "id_9": "0000000000000000000000",
+                "id_10": "0000000000000000000000"
             },
             "id_activate": {
                 "id_1": "0000000000000000000000",
                 "id_2": "0000000000000000000000",
                 "id_3": "0000000000000000000000",
                 "id_4": "0000000000000000000000",
-                "id_5": "0000000000000000000000"
+                "id_5": "0000000000000000000000",
+                "id_6": "0000000000000000000000",
+                "id_7": "0000000000000000000000",
+                "id_8": "0000000000000000000000",
+                "id_9": "0000000000000000000000",
+                "id_10": "0000000000000000000000"
             },
             "id_quest_battle":{
                 "id_1": "0000000000000000000000",
@@ -250,7 +259,7 @@ def notification_def(tokentype):
                     red(f" Time left {noti_count} Min! ⚠️")
                 )
                 notification.send()
-                time.sleep(2)
+                time.sleep(60)
                 os._exit(0)
         else:
             break
@@ -963,7 +972,7 @@ def boxuse(token, box, channelid, tokentype):
     )
     print(
         red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-        magenta(f"[{tokentype}]") +     
+        magenta(f"[{tokentype}] ") +     
         yellow(box + " ✅")    
     )
 #========================================================================================================================
@@ -1809,8 +1818,26 @@ def catpcha_recover(token, tokentype, channelid, dmchannelid, userid):
     time.sleep(2)
     run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(token, tokentype, channelid, dmchannelid, userid))
     run__bot__captcha_thread.start()
+    print(
+        red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+        magenta("[Captcha Bot]") +
+        green(f"Captcha has been fixed! ⚠️")
+    )
     pass
 def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
+    def add_id_to_quest_battle(new_id):
+        with open(file_cache, 'r') as read_data:
+            data = json.load(read_data)
+            read_data.close
+        if userid in data:
+            id_quest_battle = data[userid].setdefault("id_captcha", {})
+            id_list = list(id_quest_battle.values())
+            id_list.insert(0, new_id)
+            id_list = id_list[:10]
+            data[userid]["id_captcha"] = {f"id_{i+1}": v for i, v in enumerate(id_list)}
+            with open(file_cache, 'w') as write_data:
+                json.dump(data, write_data, indent=4)
+                write_data.close
     def captcha_def():
         global active_bot, capcha_flag, task_bot_active, captcha_notification, main_thread, extra_thread
         print(
@@ -1843,7 +1870,7 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
         global capcha_flag
         try: 
             response = requests.get(
-                f"https://discord.com/api/v9/channels/{channelid}/messages?limit=5",
+                f"https://discord.com/api/v9/channels/{channelid}/messages?limit=10",
                 headers={"authorization": token}
             )
             responsedm = requests.get(
@@ -1878,15 +1905,10 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                         (f"⚠️ **|** <@{userid}>" in content)) and 
                         (read_id(captcha_chat)) and 
                         (capcha_flag == False)):
-                        n = 0
                         for bodycounts in body:
-                            n += 1
-                            ns = str(n)
-                            data[userid]["id_captcha"][f"id_{ns}"] = bodycounts["id"]
-                            with open(file_cache, "w", encoding="utf-8") as g:
-                                json.dump(data, g, indent=4)
-                                g.close()
+                            add_id_to_quest_battle(bodycounts["id"])
                         captcha_def()
+                        break
             elif ((response.status_code == 401) or responsedm.status_code == 401):
                 print(
                     red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
@@ -1896,7 +1918,7 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
         except (KeyError, json.JSONDecodeError) as e:
             print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-                magenta(f" [{tokentype}]") +
+                magenta(f"[{tokentype}]") +
                 red(f" Error while checking captcha! ⚠️")
             )
             catpcha_recover(token, tokentype, channelid, dmchannelid, userid)
@@ -1976,7 +1998,6 @@ def extra_account():
 
 def controller_recover(token, channelid, userid):
     time.sleep(2)
-    print("controller has been fixed")
     print(
         red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
         magenta("Controller Bot") +
@@ -1986,6 +2007,19 @@ def controller_recover(token, channelid, userid):
     controller_thread1.start()
 
 def controller(token, channelid, userid):
+    def add_id_to_quest_battle(new_id):
+        with open(file_cache, 'r') as read_data:
+            data = json.load(read_data)
+            read_data.close
+        if userid in data:
+            id_quest_battle = data[userid].setdefault("id_activate", {})
+            id_list = list(id_quest_battle.values())
+            id_list.insert(0, new_id)
+            id_list = id_list[:10]
+            data[userid]["id_activate"] = {f"id_{i+1}": v for i, v in enumerate(id_list)}
+            with open(file_cache, 'w') as write_data:
+                json.dump(data, write_data, indent=4)
+                write_data.close
     def send_mess(messages):
         print(
             red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ")+
@@ -2014,15 +2048,12 @@ def controller(token, channelid, userid):
     while True:
         global task_bot_active, active_bot, captcha_notification , main_thread, extra_thread, capcha_flag
         response = requests.get(
-            f"https://discord.com/api/v9/channels/{channelid}/messages?limit=5",
+            f"https://discord.com/api/v9/channels/{channelid}/messages?limit=10",
             headers={"authorization": token},
             ) 
         if response.status_code == 200:
             try:
                 body = response.json()
-                with open(file_cache, 'r', encoding='utf-8') as u:
-                    data = json.load(u)
-                    u.close()
                 for bodycount in body:
 
                     id = bodycount["author"]["id"]
@@ -2030,16 +2061,10 @@ def controller(token, channelid, userid):
                     if (((id == main_id) or (id == extra_id)) and
                         (read_id(id_bot_message))):
                         content = bodycount["content"]
-                        n = 0
-                        for bodycounts in body:
-                            n += 1
-                            ns = str(n)
-                            data[userid]["id_activate"][f"id_{ns}"] = bodycounts["id"]
-                            with open(file_cache, "w", encoding="utf-8") as g:
-                                json.dump(data, g, indent=4)
-                                g.close()
                         if (content == f"{bot_prefix}stop"):
                             if task_bot_active:
+                                for bodycounts in body:
+                                    add_id_to_quest_battle(bodycounts["id"])
                                 active_bot = False
                                 task_bot_active = False
                                 
@@ -2051,12 +2076,15 @@ def controller(token, channelid, userid):
                                 send_mess('Bot already stopped!')
                         elif (content == f"{bot_prefix}run"):
                             if  not task_bot_active:
+                                for bodycounts in body:
+                                    add_id_to_quest_battle(bodycounts["id"])
                                 main_thread = multiprocessing.Process(target=main_account)
                                 extra_thread = multiprocessing.Process(target=extra_account)
 
                                 main_thread.start()
                                 extra_thread.start()
                                 captcha_notification = False
+                                
                                 task_bot_active = True
                                 capcha_flag = False
                                 active_bot = True
@@ -2064,23 +2092,6 @@ def controller(token, channelid, userid):
                                 send_mess('Bot is Runing!')
                             else:
                                 send_mess('Bot has already runned!')
-                        elif (content == f"{bot_prefix}reset"):
-                            
-                            captcha_notification = False
-                            task_bot_active = True
-                            capcha_flag = False
-                            active_bot = True
-                            if active_bot:
-                                main_thread.kill()
-                                extra_thread.kill()
-                            time.sleep(1)
-                            main_thread = multiprocessing.Process(target=main_account)
-                            extra_thread = multiprocessing.Process(target=extra_account)
-
-                            main_thread.start()
-                            extra_thread.start()
-                            time.sleep(2)
-                            send_mess('Bot resetted!')
             except json.JSONDecodeError as e:
                 print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
@@ -2092,7 +2103,7 @@ def controller(token, channelid, userid):
         elif response.status_code == 401:
             print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-                magenta(" Controller Bot") +
+                magenta("[Controller Bot]") +
                 red(f" 401: Unauthorized! ⚠️")
             )
         time.sleep(0.5)
@@ -2105,6 +2116,7 @@ if __name__ == '__main__':
     extra_thread = multiprocessing.Process(target=extra_account)
 
     main_thread.start()
+    time.sleep(0.1)
     extra_thread.start()
     run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(main_token, "Main Token", main_channelid, main_dmchannelid, main_id))
     controller_thread1 = threading.Thread(target=controller, args=(main_token, main_channelid, main_id))
