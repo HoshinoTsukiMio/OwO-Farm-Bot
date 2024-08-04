@@ -2,7 +2,7 @@
     "settings": {
         "prefix": "owo",
         "bot_prefix": "!",
-        "slash_command": false,
+        "slash_command": true,
         "sayowo": true,
         "pray": true,
         "curse": false,
@@ -17,11 +17,11 @@
             "gemcheck": true,
             "lootboxcheck": true,
             "fabledlootboxcheck": true,
-            "cratecheck": false
+            "cratecheck": true
         },
         "animals": {
             "enable": true,
-            "type": "sell",
+            "type": "sac",
             "animaltype": {
                 "common": true,
                 "uncommon": true,
@@ -57,15 +57,17 @@
     "main": {
         "note": "",
         "token": "",
+        "serverid": "",
         "channelid": "",
-        "dmchannelid": "",
-        "questchannelid": ""
+        "questchannelid": "",
+        "owo_dmschannelid": ""
     },
     "extra": {
         "note": "",
         "token": "",
+        "serverid": "",
         "channelid": "",
-        "dmchannelid": "",
-        "questchannelid": ""
+        "questchannelid": "",
+        "owo_dmschannelid": ""
     }
 }
