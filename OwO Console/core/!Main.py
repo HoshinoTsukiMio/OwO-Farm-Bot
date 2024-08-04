@@ -60,8 +60,8 @@ magenta = Terminal().magenta
 print("Checking Setting")
 try:
     setting               = cfgs["settings"]
-    prefix                = str(setting['prefix'])
-    bot_prefix            = str(setting['bot_prefix'])
+    prefix                = str(setting['owo_prefix'])
+    bot_prefix            = str(setting['control_prefix'])
     slash_command         = boolean_conv(setting['slash_command'])
     sayowo                = boolean_conv(setting['sayowo'])
     pray                  = boolean_conv(setting['pray'])
@@ -230,6 +230,8 @@ def checkversion():
     versions = response.text.strip()
     if versions != version:
         print("New version detected")
+        time.sleep(3)
+        os._exit(0)
 #========================================================================================================================
 def notification_def(tokentype):
     notification = Notify()
