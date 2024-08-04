@@ -10,7 +10,7 @@
 [📍 ・Channel id](#channel-id)<br>
 [📍 ・Server id](#server-id)<br>
 [📍 ・OwO DM channel id](#owo-dm-channel-id)<br>
-[⚠️・Captcha Alert](#Captcha Alert)<br>
+[⚠️・Captcha Alert](#%EF%B8%8Fcaptcha-alert)<br>
 [🔗・Required Links](#required-links)<br>
 [🎈 ・Usage](#usage)<br>
 
