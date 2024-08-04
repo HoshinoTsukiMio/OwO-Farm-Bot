@@ -1,5 +1,5 @@
 <br>
-<h1 align="center">OwO Farm Bot v1-0.1.1adb1b95 </h1>
+<h1 align="center">OwO Farm Bot v1-0.2.a334f635 </h1>
 
 </p>
 
@@ -104,16 +104,20 @@
         }
     },
     "main":{
+        "note": "",note what you want :P
         "token":"main token",
+        "serverid": "", id ur server main
         "channelid":"channel id for main token",
         "dmchannelid":"owo bot dm channel id",
-        "questchannelid": "auto quest channel id" 
+        "questchannelid": "auto quest channel id",
+        "owo_dmschannelid":"main token owo bot dm channel id",
     },
     "extra":{
         "token":"extra token",
-        "channelid":"channel id for extra token", 
-        "dmchannelid":"extra token owo bot dm channel id",
-        "questchannelid": "auto quest channel id" 
+        "serverid": "", id ur server extra
+        "channelid":"channel id for extra token",
+        "questchannelid": "auto quest channel id",
+        "owo_dmschannelid":"extra token owo bot dm channel id",
     }
 }
 ```
