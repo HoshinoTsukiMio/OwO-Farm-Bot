@@ -148,7 +148,7 @@ captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
 
-version = "v1-0.2.a334f635"
+version = "v1-0.2.e030e4b1"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
