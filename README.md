@@ -10,7 +10,7 @@
 [📍 ・Channel id](#channel-id)<br>
 [📍 ・Server id](#server-id)<br>
 [📍 ・OwO DM channel id](#owo-dm-channel-id)<br>
-[⚠️・Captcha](#captchalert)<br>
+[⚠️・Captcha](#captcha)<br>
 [🔗・Required Links](#required-links)<br>
 [🎈 ・Usage](#usage)<br>
 
@@ -150,6 +150,7 @@ m)
 ![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-farm-bot/main/images/owochannelid.jpg)
 
 ## ⚠️・Captcha
+
 !!! If you want the captcha alert to work properly, turn off do not disturb
 
 ![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-farm-bot/main/images/captchaalert.png)
