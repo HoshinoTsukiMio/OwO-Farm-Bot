@@ -1,32 +1,31 @@
 <br>
-<h1 align="center">OwO Farm Bot v1-0.2.a334f635 </h1>
+<h1 align="center">OwO Farm Bot v1-0.2.e030e4b1 </h1>
 
 </p>
 
-[❗・Important](#important)<br>
+[❗ ・Important](#important)<br>
 [👑・Features](#features)<br>
-[⚙・setting_config.json example](#configjson-example)<br>
+[🔨・setting_config.json example](#configjson-example)<br>
 [💎・Get Token](#get-token)<br>
-[📍・OwO DM channel id](#owo-dm-channel-id)<br>
+[📍 ・Channel id](#channel-id)<br>
+[📍 ・Server id](#server-id)<br>
+[📍 ・OwO DM channel id](#owo-dm-channel-id)<br>
 [⚠️・Captcha Alert](#captcha-alert)<br>
 [🔗・Required Links](#required-links)<br>
-[🎈・Usage](#usage)<br>
+[🎈 ・Usage](#usage)<br>
 
 
 ## ❗・Important
 -   You should use 2 account for access dual auto quest
 -   Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. I am not responsible for them.
--   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.
--   Discord may restart as a result of discord rpc overload.
--   It can detect virus due to captcha(ban) bypasser please turn off your antivirus(not really).
--   Slash command '/' still in beta mode cant be know does it work well
+-   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.well
 
 ## 👑・Features
-
--   Auto Hunt
--   Auto Battle
+-   Can control bot to run or stop
+-   Auto Hunt (slash command)
+-   Auto Battle (slash command)
 -   Inventory Check
-    -   Auto Gem Use (beta)
+    -   Auto Gem Use 
     -   Auto Lootbox Use
     -   Auto Fabled Lootbox Use
     -   Auto Crate Use
@@ -40,7 +39,7 @@
 -   Auto CheckList
     -   Auto Daily
     -   Auto Cookie
--   Captcha Protection v0.0.0 (beta)
+-   Captcha Protection v1.0.0 
 -   **Extra Token**
     -   All Main Token Features
 
@@ -49,9 +48,9 @@
 ```
 {
     "settings": {
-        "prefix": "owo", prefix for owo you set in your server defaul is owo
-        "bot_prefix": "! or any prefix this use to run bot like !run, !reset, !stop",
-        "slash_command": true, turn on or off slsh command mode
+        "owo_prefix": "owo", prefix for owo you set in your server defaul is owo
+        "control_prefix": "! or any prefix this use to run bot like !run, !stop",
+        "slash_command": true, turn on or off slash command mode
         "sayowo": "true or false",
         "pray": "true or false",
         "curse": "true or false",
@@ -137,6 +136,13 @@ m)
     .find((m) => m?.exports?.default?.getToken !== void 0)
     .exports.default.getToken();
 ```
+## 📍・Channel id
+
+![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/images/ID%20Server.png)
+
+## 📍・Server id
+
+![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/images/ID%20Server.png)
 
 ## 📍・OwO DM channel id
 
@@ -160,4 +166,7 @@ m)
 ```
 > YOU NEED LATEST PYTHON !
 > edit setting_config.json it in data folder
+> run "! Install Virtual Enviroment.bat" to set up Virtual Enviroment
+> then you can run "! Run Bot.bat" to start bot
+> enjoy and dont forget to update id it has a new version
 ```
