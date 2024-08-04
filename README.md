@@ -71,6 +71,7 @@
             "enable": "true or false",
             "type": "sell or sac",
             "animaltype": {
+                "all": "true or false",
                 "common": "true or false",
                 "uncommon": "true or false",
                 "rare": "true or false",
