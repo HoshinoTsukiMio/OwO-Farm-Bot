@@ -5,7 +5,7 @@
 
 [❗ ・Important](#important)<br>
 [👑・Features](#features)<br>
-[🔨・setting_config.json example](#setting_config.json-example)<br>
+[🔨・setting example](#setting-example)<br>
 [💎・Get Token](#get-token)<br>
 [📍 ・Channel id](#channel-id)<br>
 [📍 ・Server id](#server-id)<br>
@@ -43,7 +43,7 @@
 -   **Extra Token**
     -   All Main Token Features
 
-## ⚙・setting_config.json example
+## ⚙・setting example
 
 ```
 {
