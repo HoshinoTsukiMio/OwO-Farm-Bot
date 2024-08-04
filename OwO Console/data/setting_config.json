@@ -1,7 +1,7 @@
 {
     "settings": {
-        "prefix": "owo",
-        "bot_prefix": "!",
+        "owo_prefix": "owo",
+        "control_prefix": "!",
         "slash_command": true,
         "sayowo": true,
         "pray": true,
