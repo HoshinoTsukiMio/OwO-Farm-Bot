@@ -1,4 +1,3 @@
-import multiprocessing.process
 import json, math, random, os, time, hashlib, threading, multiprocessing, datetime, base64
 from file import phrases, actvar, gamblevar
 try:
@@ -59,76 +58,84 @@ magenta = Terminal().magenta
 
 """▄▀█ █▀▀ █▀▀ █▀▀ █▀ █▀   ▀█▀ █░█ █▀▀   █▀ █▀▀ ▀█▀ ▀█▀ █ █▄░█ █▀▀ █▀
    █▀█ █▄▄ █▄▄ ██▄ ▄█ ▄█   ░█░ █▀█ ██▄   ▄█ ██▄ ░█░ ░█░ █ █░▀█ █▄█ ▄█"""
+print("Checking Setting")
+try:
+    setting               = cfgs["settings"]
+    prefix                = str(setting['prefix'])
+    bot_prefix            = str(setting['bot_prefix'])
+    slash_command         = boolean_conv(setting['slash_command'])
+    sayowo                = boolean_conv(setting['sayowo'])
+    pray                  = boolean_conv(setting['pray'])
+    curse                 = boolean_conv(setting['curse'])
+    hunt                  = boolean_conv(setting['hunt'])
+    battle                = boolean_conv(setting['battle'])
+    autoquest             = boolean_conv(setting['autoquest'])
+    extratokencheck       = boolean_conv(setting['extratoken'])
+    randommess            = boolean_conv(setting['randommess'])
+    banbypass             = boolean_conv(setting['banbypass'])
+    #========================================================================================================================
+    inventory             = setting['inventory']
+    inventorycheck        = boolean_conv(inventory['inventorycheck'])
+    gemcheck              = boolean_conv(inventory['gemcheck'])
+    lootboxcheck          = boolean_conv(inventory['lootboxcheck'])
+    fabledlootboxcheck    = boolean_conv(inventory['fabledlootboxcheck'])
+    cratecheck            = boolean_conv(inventory['cratecheck'])
+    #========================================================================================================================
+    animals               = setting['animals']
+    ani_enable            = boolean_conv(animals['enable'])
+    ani_type              = str(animals['type'])
+    animaltype            = animals['animaltype']
+    common                = boolean_conv(animaltype['common'])
+    uncommon              = boolean_conv(animaltype['uncommon'])
+    rare                  = boolean_conv(animaltype['rare'])
+    epic                  = boolean_conv(animaltype['epic'])
+    mythical              = boolean_conv(animaltype['mythical'])
+    patreon               = boolean_conv(animaltype['patreon'])
+    cpatreon              = boolean_conv(animaltype['cpatreon'])
+    legendary             = boolean_conv(animaltype['legendary'])
+    gem                   = boolean_conv(animaltype['gem'])
+    bot                   = boolean_conv(animaltype['bot'])
+    distorted             = boolean_conv(animaltype['distorted'])
+    fabled                = boolean_conv(animaltype['fabled'])
+    special               = boolean_conv(animaltype['special'])
+    hidden                = boolean_conv(animaltype['hidden'])
+    #========================================================================================================================
+    upgradeautohunt       = setting['upgradeautohunt']
+    upg_enable            = boolean_conv(upgradeautohunt['enable'])
+    upg_type              = str(upgradeautohunt['upgtype'])
+    #========================================================================================================================
+    gamble                = setting['gamble']
 
-setting               = cfgs["settings"]
-prefix                = str(setting['prefix'])
-bot_prefix            = str(setting['bot_prefix'])
-slash_command         = boolean_conv(setting['slash_command'])
-sayowo                = boolean_conv(setting['sayowo'])
-pray                  = boolean_conv(setting['pray'])
-curse                 = boolean_conv(setting['curse'])
-hunt                  = boolean_conv(setting['hunt'])
-battle                = boolean_conv(setting['battle'])
-autoquest             = boolean_conv(setting['autoquest'])
-extratokencheck       = boolean_conv(setting['extratoken'])
-randommess            = boolean_conv(setting['randommess'])
-banbypass             = boolean_conv(setting['banbypass'])
-#========================================================================================================================
-inventory             = setting['inventory']
-inventorycheck        = boolean_conv(inventory['inventorycheck'])
-gemcheck              = boolean_conv(inventory['gemcheck'])
-lootboxcheck          = boolean_conv(inventory['lootboxcheck'])
-fabledlootboxcheck    = boolean_conv(inventory['fabledlootboxcheck'])
-cratecheck            = boolean_conv(inventory['cratecheck'])
-#========================================================================================================================
-animals               = setting['animals']
-ani_enable            = boolean_conv(animals['enable'])
-ani_type              = str(animals['type'])
-animaltype            = animals['animaltype']
-common                = boolean_conv(animaltype['common'])
-uncommon              = boolean_conv(animaltype['uncommon'])
-rare                  = boolean_conv(animaltype['rare'])
-epic                  = boolean_conv(animaltype['epic'])
-mythical              = boolean_conv(animaltype['mythical'])
-patreon               = boolean_conv(animaltype['patreon'])
-cpatreon              = boolean_conv(animaltype['cpatreon'])
-legendary             = boolean_conv(animaltype['legendary'])
-gem                   = boolean_conv(animaltype['gem'])
-bot                   = boolean_conv(animaltype['bot'])
-distorted             = boolean_conv(animaltype['distorted'])
-fabled                = boolean_conv(animaltype['fabled'])
-special               = boolean_conv(animaltype['special'])
-hidden                = boolean_conv(animaltype['hidden'])
-#========================================================================================================================
-upgradeautohunt       = setting['upgradeautohunt']
-upg_enable            = boolean_conv(upgradeautohunt['enable'])
-upg_type              = str(upgradeautohunt['upgtype'])
-#========================================================================================================================
-gamble                = setting['gamble']
+    coinflip              = gamble['coinflip']
+    coinflip_enable       = boolean_conv(coinflip['enable'])
+    coinflip_amount       = P_str_int_conv(coinflip['amount'])
 
-coinflip              = gamble['coinflip']
-coinflip_enable       = boolean_conv(coinflip['enable'])
-coinflip_amount       = P_str_int_conv(coinflip['amount'])
+    slots                 = gamble['slots']
+    slots_enable          = boolean_conv(slots['enable'])
+    slots_amount          = P_str_int_conv(slots['amount'])
+    #========================================================================================================================
+    main                  = cfgs['main']
+    main_token            = str(main['token'])
+    main_id               = str(token_decode(main_token))
+    main_serverid         = str(main['serverid'])
+    main_channelid        = str(main['channelid'])
+    main_questchannelid   = str(main['questchannelid'])
+    main_dmchannelid      = str(main['owo_dmschannelid'])
 
-slots                 = gamble['slots']
-slots_enable          = boolean_conv(slots['enable'])
-slots_amount          = P_str_int_conv(slots['amount'])
-#========================================================================================================================
-main                  = cfgs['main']
-main_token            = str(main['token'])
-main_id               = str(token_decode(main_token))
-main_channelid        = str(main['channelid'])
-main_dmchannelid      = str(main['dmchannelid'])
-main_questchannelid   = str(main['questchannelid'])
+    extra                 = cfgs['extra']
+    extra_token           = str(extra['token'])
+    extra_id              = str(token_decode(extra_token))
+    extra_serverid        = str(extra['serverid'])
+    extra_channelid       = str(extra['channelid'])
+    extra_questchannelid  = str(extra['questchannelid'])
+    extra_dmchannelid     = str(extra['owo_dmschannelid'])
 
-extra                 = cfgs['extra']
-extra_token           = str(extra['token'])
-extra_id              = str(token_decode(extra_token))
-extra_channelid       = str(extra['channelid'])
-extra_dmchannelid     = str(extra['dmchannelid'])
-extra_questchannelid  = str(extra['questchannelid'])
-
-#========================================================================================================================
+    #========================================================================================================================
+except (IndexError, KeyError) as e:
+    print("Check your setting_config.json there some missing")
+    time.sleep(1)
+    os._exit(0)
+time.sleep(1.5)
 notification = Notify()
 process = psutil.Process()
 quest = True
@@ -216,19 +223,38 @@ def checkversion():
         print("New version detected")
 #========================================================================================================================
 def notification_def(tokentype):
+    notification = Notify()
     noti_count = 11
-    while noti_count > 1:
+    while noti_count > -1:
         if captcha_notification == True:
             noti_count = noti_count - 1
-            noti_count_str = str(noti_count)
-            notification.title = f"[{tokentype}] Captcha Detected!"
-            notification.message = f"SOLVE CAPTCHA AND RESTART BOT\nyou only have {noti_count_str}min left"
-            notification.icon = "data/owo.ico"
-            print(f"notification {noti_count}")
-            notification.send()
+            if noti_count > 0:
+                noti_count_str = str(noti_count)
+                notification.title = f"[{tokentype}] Captcha Detected!"
+                notification.message = f"SOLVE CAPTCHA AND RESTART BOT\nyou only have {noti_count_str}min left"
+                notification.icon = "data/owo.ico"
+                print(
+                    red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                    magenta(f"[{tokentype}]") +
+                    red(f" Time left {noti_count} Min! ⚠️")
+                )
+                notification.send()
+            else:
+                noti_count_str = str(noti_count)
+                notification.title = f"[{tokentype}] Captcha Detected!"
+                notification.message = f"You are Banned by OwO"
+                notification.icon = "data/owo.ico"
+                print(
+                    red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                    magenta(f"[{tokentype}]") +
+                    red(f" Time left {noti_count} Min! ⚠️")
+                )
+                notification.send()
+                time.sleep(2)
+                os._exit(0)
         else:
             break
-        time.sleep(60)
+        time.sleep(10)
 #========================================================================================================================
 def rantime():
     rdt = random.randint(1, 5) + round(random.uniform(0, 1), 3)
@@ -268,7 +294,7 @@ def bot_owo(token, tokentype, channelid):
         blue(" OwO ✅ ")    
         )
 #========================================================================================================================
-def bot_hunt(token, timehunt, tokentype, channelid, session_id):
+def bot_hunt(token, timehunt, tokentype, channelid, session_id, serverid):
     if slash_command:
         requests.post(
             f"https://discord.com/api/v9/interactions",
@@ -276,7 +302,7 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
             json={
                 "type": 2,
                 "application_id": "408785106942164992",
-                "guild_id": "1252929540792123412",
+                "guild_id": serverid,
                 "channel_id": channelid,
                 "session_id": session_id,
                 "data": {
@@ -312,7 +338,7 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
             f"https://discord.com/api/v9/channels/{channelid}/messages",
             headers={"authorization": token},
             json={
-                "content": prefix + "hunt",        
+                "content": prefix + "h",        
                 'nonce': nonce(),
                 "tts": False,
                 "flags": 0,
@@ -324,7 +350,7 @@ def bot_hunt(token, timehunt, tokentype, channelid, session_id):
         blue(" Hunt ✅ (" + str(timehunt) + " ms)")    
         )
 #========================================================================================================================
-def bot_battle(token, timebattle, tokentype, channelid, session_id):
+def bot_battle(token, timebattle, tokentype, channelid, session_id, serverid):
     if slash_command:
         requests.post(
             f"https://discord.com/api/v9/interactions",
@@ -332,7 +358,7 @@ def bot_battle(token, timebattle, tokentype, channelid, session_id):
             json = {
                 "type": 2,
                 "application_id": "408785106942164992",
-                "guild_id": "1252929540792123412",
+                "guild_id": serverid,
                 "channel_id": channelid,
                 "session_id": session_id,
                 "data": {
@@ -375,7 +401,7 @@ def bot_battle(token, timebattle, tokentype, channelid, session_id):
             f"https://discord.com/api/v9/channels/{channelid}/messages",
             headers={"authorization": token},
             json={
-                "content": prefix + "battle",        
+                "content": prefix + "b",        
                 'nonce': nonce(),
                 "tts": False,
                 "flags": 0,
@@ -415,7 +441,6 @@ def bot_animals(token, tokentype, channelid, ani_type):
     animalcheck = False
     animaltypes = ""
     ranks = [
-        'all',
         "common",
         "uncommon",
         "rare",
@@ -431,13 +456,15 @@ def bot_animals(token, tokentype, channelid, ani_type):
         "special",
         "hidden",
     ]
-    for e in ranks:
-        if e == "all":
+    rank = ["c","u","r","e","m","p","cp","l","g","b","d","f","s","h",
+    ]
+    for e, a in zip(ranks,rank):
+        if animaltype["all"]:
             animaltypes = "all"
             break
         else:
             if animaltype[e]:
-                animaltypes += f"{e} "
+                animaltypes += f"{a} "
 
     if ani_type == "sacrifice" or ani_type == "sell" or ani_type == "sac":
         animalcheck = True
@@ -598,7 +625,7 @@ def bot_coinflip(token, tokentype, channelid):
         f"https://discord.com/api/v9/channels/{channelid}/messages",
         headers={"authorization": token},
         json={
-            "content": prefix + "coinflip " + coinflip_amount,        
+            "content": prefix + "cf " + coinflip_amount,        
             'nonce': nonce(),
             "tts": False,
             "flags": 0,
@@ -616,7 +643,7 @@ def bot_slots(token, tokentype, channelid):
         f"https://discord.com/api/v9/channels/{channelid}/messages",
         headers={"authorization": token},
         json={
-            "content": prefix + "coinflip " + slots_amount,        
+            "content": prefix + "s " + slots_amount,        
             'nonce': nonce(),
             "tts": False,
             "flags": 0,
@@ -634,7 +661,7 @@ def upgradeall(token, tokentype, channelid):
         f"https://discord.com/api/v9/channels/{channelid}/messages",
         headers={"authorization": token},
         json={
-            "content": prefix + "upgrade " + upg_type + " all",        
+            "content": prefix + "upg " + upg_type + " all",        
             'nonce': nonce(),
             "tts": False,
             "flags": 0,
@@ -911,7 +938,7 @@ def getinv(token, channelid, tokentype, gemc, collectc):
     if lootboxcheck:
         if "`050`" in cont:
             time.sleep(2)
-            boxuse(token, "lootbox all", channelid, tokentype)
+            boxuse(token, "lb all", channelid, tokentype)
 
     if fabledlootboxcheck:
         if "`049`" in cont:
@@ -921,7 +948,7 @@ def getinv(token, channelid, tokentype, gemc, collectc):
     if cratecheck:
         if "`100`" in cont:
             time.sleep(2)
-            boxuse(token, "crate all", channelid, tokentype)
+            boxuse(token, "wc all", channelid, tokentype)
 #========================================================================================================================
 def boxuse(token, box, channelid, tokentype):
     requests.post(
@@ -1005,7 +1032,7 @@ def questcurseme(tokenrd, useridst, channelid, pro1, pro2):
         else:
             break
 #========================================================================================================================
-def questbattlefriend(tokenst, tokenrd, useridst, channelid, pro1, pro2, session_id, session_id2):
+def questbattlefriend(tokenst, tokenrd, useridst, channelid, pro1, pro2, session_id, session_id2, serverid):
     np = (pro2 - pro1) + 1
     def read_id(id_to_check):
         with open(file_cache, 'r', encoding='utf-8') as f:
@@ -1062,7 +1089,7 @@ def questbattlefriend(tokenst, tokenrd, useridst, channelid, pro1, pro2, session
                     json={
                         "type": 2,
                         "application_id": "408785106942164992",
-                        "guild_id": "1252048445955506249",
+                        "guild_id": serverid,
                         "channel_id": channelid,
                         "session_id": session_id,
                         "data": {
@@ -1113,7 +1140,7 @@ def questbattlefriend(tokenst, tokenrd, useridst, channelid, pro1, pro2, session
                     json = {
                         "type": 3,
                         "nonce": nonce(),
-                        "guild_id": "1252048445955506249",
+                        "guild_id": serverid,
                         "channel_id": channelid,
                         "message_flags": 0,
                         "message_id": get_id(tokenst, channelid, useridst),
@@ -1136,7 +1163,7 @@ def questbattlefriend(tokenst, tokenrd, useridst, channelid, pro1, pro2, session
                 f"https://discord.com/api/v9/channels/{channelid}/messages",
                 headers={"authorization": tokenrd},
                 json={
-                    "content": prefix + f"battle <@{useridst}>",        
+                    "content": prefix + f"b <@{useridst}>",        
                     'nonce': nonce(),
                     "tts": False,
                     "flags": 0,
@@ -1245,7 +1272,7 @@ def questsayowo(token, channelid, pro1, pro2):
             else:
                 break
 #========================================================================================================================
-def doquest(questss,tokenst,tokenrd,useridst,channelid,progress1,progress2):
+def doquest(questss,tokenst,tokenrd,useridst,channelid,progress1,progress2, serverid):
     global quest
     quests = questss
     print(quests)
@@ -1327,7 +1354,8 @@ def doquest(questss,tokenst,tokenrd,useridst,channelid,progress1,progress2):
                         int(progress1),
                         int(progress2),
                         generate_random_128bit_hex(),
-                        generate_random_128bit_hex()
+                        generate_random_128bit_hex(),
+                        serverid
                     )
                 )
                 return do_questbattlefriend.start()
@@ -1478,7 +1506,7 @@ def timecount(userid):
 
     return questcheckers
         
-def getquests(tokenst,tokenrd,useridst,channelid, tokentype):
+def getquests(tokenst,tokenrd,useridst,channelid, tokentype, serverid):
     questchecker = timecount(useridst)
     global quest, active_bot
     aquests = ""
@@ -1489,7 +1517,7 @@ def getquests(tokenst,tokenrd,useridst,channelid, tokentype):
             f"https://discord.com/api/v9/channels/{channelid}/messages",
             headers={"authorization": tokenst},
             json={
-                "content": f"{prefix}quest",        
+                "content": f"{prefix}q",        
                 'nonce': nonce(),
                 "tts": False,
                 "flags": 0,
@@ -1530,88 +1558,88 @@ def getquests(tokenst,tokenrd,useridst,channelid, tokentype):
                 if (aquests == bquests) and (aquests == cquests):
                     progress2 = max(aprogress2, bprogress2, cprogress2)
                     progress1 = min(aprogress1, bprogress1, cprogress1)
-                    do_quest_1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2))
+                    do_quest_1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2, serverid))
                     return do_quest_1.start()
                 elif (((aquests == bquests) or (aquests == cquests)or(bquests == cquests)) and ((aquests != "") and (bquests != ""))):
                     if (aquests == bquests):
                         progress2 = max(aprogress2, bprogress2)
                         progress1 = min(aprogress1, bprogress1)
-                        do_quest_2 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2))
+                        do_quest_2 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2, serverid))
                         do_quest_2.start
                         if cquests != "":
                             if (("pray" or "curse") in aquests) and (("pray" or "curse") in cquests):
                                 progress = int(progress2) - int(progress1)
                                 time.sleep(progress * 60 * 5)
-                                do_quest_2_1= threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                                do_quest_2_1= threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                                 do_quest_2_1.start
                             else:
-                                do_quest_2_2= threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                                do_quest_2_2= threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                                 do_quest_2_2.start
                     elif (cquests != ""):
                         if (aquests == cquests):
                             progress2 = max(aprogress2, cprogress2)
                             progress1 = min(aprogress1, cprogress1)
-                            do_quest_3 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2))
+                            do_quest_3 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,progress1,progress2, serverid))
                             do_quest_3.start
                             if (("pray" or "curse") in aquests) and (("pray" or "curse") in bquests):
                                 progress = int(progress2) - int(progress1)
                                 time.sleep(progress * 60 * 5)
-                                do_quest_3_1 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                                do_quest_3_1 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                                 do_quest_3_1.start
                             else:
-                                do_quest_3_2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                                do_quest_3_2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                                 do_quest_3_2.start
                         elif (bquests == cquests):
                             progress2 = max(aprogress2, cprogress2)
                             progress1 = min(aprogress1, cprogress1)
-                            do_quest_4 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,progress1,progress2))
+                            do_quest_4 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,progress1,progress2, serverid))
                             do_quest_4.start
                             if (("pray" or "curse") in aquests) and (("pray" or "curse") in bquests):
                                 progress = int(progress2) - int(progress1)
                                 time.sleep(progress * 60 * 5)
-                                do_quest_4_1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                                do_quest_4_1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                                 do_quest_4_1.start
                             else:
-                                do_quest_4_2 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                                do_quest_4_2 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                                 do_quest_4_2.start
                 else:
                     if (("pray" or "curse") in aquests) and (("pray" or "curse") in bquests):
-                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                         do_quest1.start()
                         aprogress = int(aprogress2) - int(aprogress1)
                         if cquests != "":
-                            do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                            do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                             do_quest3.start()
                             pass
                         time.sleep(aprogress * 60 * 5)
-                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                         do_quest2.start()
                     elif (("pray" or "curse") in aquests) and (("pray" or "curse") in cquests):
-                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                         do_quest1.start()
-                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                         do_quest2.start()
                         aprogress = int(aprogress2) - int(aprogress1)
                         time.sleep(aprogress * 60 * 5)
-                        do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                        do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                         do_quest3.start()
                     elif (("pray" or "curse") in bquests) and (("pray" or "curse") in cquests):
-                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                        do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                         do_quest2.start()
-                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                         do_quest1.start()
                         bprogress = int(bprogress2) - int(bprogress1)
                         time.sleep(bprogress * 60 * 5)
-                        do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                        do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                         do_quest3.start()
                     else:
-                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2))
+                        do_quest1 = threading.Thread(target=doquest, args=(aquests,tokenst,tokenrd,useridst,channelid,aprogress1,aprogress2, serverid))
                         do_quest1.start()
                         if bquests != "":
-                            do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2))
+                            do_quest2 = threading.Thread(target=doquest, args=(bquests,tokenst,tokenrd,useridst,channelid,bprogress1,bprogress2, serverid))
                             do_quest2.start()
                         elif cquests != "":
-                            do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2))
+                            do_quest3 = threading.Thread(target=doquest, args=(cquests,tokenst,tokenrd,useridst,channelid,cprogress1,cprogress2, serverid))
                             do_quest3.start()
         except (KeyError, json.JSONDecodeError) as e:
             print(
@@ -1683,7 +1711,7 @@ def bot_extra():
     ▒█░░░ █▄▄█ █░░ █░░ 　 █░░ █░░█ █░░█ █░░█ 
     ▒█▄▄█ ▀░░▀ ▀▀▀ ▀▀▀ 　 ▀▀▀ ▀▀▀▀ ▀▀▀▀ █▀▀▀"""
 #========================================================================================================================
-def run__bot__hunt__and__battle(tokens, tokentypes, channelids):
+def run__bot__hunt__and__battle(tokens, tokentypes, channelids, serverid):
     while True:
         global active_bot, battle_hunt
         if active_bot:
@@ -1692,14 +1720,14 @@ def run__bot__hunt__and__battle(tokens, tokentypes, channelids):
             if (hunt):
                 time.sleep(timehunt)
                 timehunts = round(timehunt, 3)
-                bot_hunt(tokens, timehunts, tokentypes, channelids, generate_random_128bit_hex())
+                bot_hunt(tokens, timehunts, tokentypes, channelids, generate_random_128bit_hex(), serverid)
                 if inventorycheck:
                     time.sleep(1)
                     checkinv(tokens, channelids, tokentypes)
             if (battle) and battle_hunt:
                 time.sleep(timebattle + 5)
                 timebattles = round(timebattle, 3)
-                bot_battle(tokens, timebattles, tokentypes, channelids, generate_random_128bit_hex()) 
+                bot_battle(tokens, timebattles, tokentypes, channelids, generate_random_128bit_hex(), serverid) 
         else:
             break
         time.sleep(15)
@@ -1777,13 +1805,10 @@ def run__bot__gamble(tokens, tokentypes, channelids):
     ██║░░██╗██╔══██║██║░░░░░██║░░░░░  ██╔══██╗██║░░██║░░░██║░░░
     ╚█████╔╝██║░░██║███████╗███████╗  ██████╦╝╚█████╔╝░░░██║░░░
     ░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝  ╚═════╝░░╚════╝░░░░╚═╝░░░"""
-def catpcha_recover():
-    run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(main_token, "Main Token", main_channelid, main_dmchannelid, main_id))
+def catpcha_recover(token, tokentype, channelid, dmchannelid, userid):
+    time.sleep(2)
+    run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(token, tokentype, channelid, dmchannelid, userid))
     run__bot__captcha_thread.start()
-
-    if etoken:
-        extra__run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(extra_token, "Extra Token", extra_channelid, extra_dmchannelid, extra_id))
-        extra__run__bot__captcha_thread.start()
     pass
 def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
     def captcha_def():
@@ -1799,7 +1824,7 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
         capcha_flag = True
         main_thread.kill()
         extra_thread.kill()
-        time.sleep(10)
+        time.sleep(0.001)
         notification_def(tokentype)
     
     def read_id(id_to_check):
@@ -1825,57 +1850,56 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                 f"https://discord.com/api/v9/channels/{dmchannelid}/messages?limit=1",
                 headers={"authorization": token}
             )
+            if ((response.status_code == 200) and (responsedm.status_code == 200)):
+                with open(file_cache, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    f.close
+                id_captcha_dm = data[userid]["id_captcha_dm"]
 
-            with open(file_cache, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                f.close
-            id_captcha_dm = data[userid]["id_captcha_dm"]
-
-            bodydm = responsedm.json()
-            captcha_md= bodydm[0]["id"]
-            contentmd = bodydm[0]["content"]
-            if  (("Are you a real human?" in  contentmd) and 
-                 (captcha_md != id_captcha_dm) and 
-                 (capcha_flag == False)):
-                data[userid]["id_captcha_dm"] = captcha_md
-                with open(file_cache, "w", encoding="utf-8") as write_id_dm:
-                    json.dump(data, write_id_dm, indent=4)
-                    write_id_dm.close()
-                captcha_def()
-                
-            body = response.json()
-            for bodycount in body:
-                m = 1
-                if (bodycount == None ):
-                    while m<6:
-                        dmprotectprouwu(token, channelid, tokentype)
-                        m +=1
-                content = bodycount["content"]
-                idowo = bodycount["author"]["id"]
-                captcha_chat = bodycount["id"]
-                #(idowo == "408785106942164992") and 
-                if (("captcha" in content) and 
-                    (f"⚠️ **|** <@{userid}>" in content) and 
-                    (read_id(bodycount["id"])) and 
+                bodydm = responsedm.json()
+                captcha_md= bodydm[0]["id"]
+                contentmd = bodydm[0]["content"]
+                if  (("Are you a real human?" in  contentmd) and 
+                    (captcha_md != id_captcha_dm) and 
                     (capcha_flag == False)):
-                    n = 0
-                    for bodycounts in body:
-                        n += 1
-                        ns = str(n)
-                        data[userid]["id_captcha"][f"id_{ns}"] = bodycounts["id"]
-                        with open(file_cache, "w", encoding="utf-8") as g:
-                            json.dump(data, g, indent=4)
-                            g.close()
+                    data[userid]["id_captcha_dm"] = captcha_md
+                    with open(file_cache, "w", encoding="utf-8") as write_id_dm:
+                        json.dump(data, write_id_dm, indent=4)
+                        write_id_dm.close()
                     captcha_def()
                     
+                body = response.json()
+                for bodycount in body:
+                    content = bodycount["content"]
+                    idowo = bodycount["author"]["id"]
+                    captcha_chat = bodycount["id"]
+                    #(idowo == "408785106942164992") and 
+                    if ((("captcha" in content) or 
+                        (f"⚠️ **|** <@{userid}>" in content)) and 
+                        (read_id(captcha_chat)) and 
+                        (capcha_flag == False)):
+                        n = 0
+                        for bodycounts in body:
+                            n += 1
+                            ns = str(n)
+                            data[userid]["id_captcha"][f"id_{ns}"] = bodycounts["id"]
+                            with open(file_cache, "w", encoding="utf-8") as g:
+                                json.dump(data, g, indent=4)
+                                g.close()
+                        captcha_def()
+            elif ((response.status_code == 401) or responsedm.status_code == 401):
+                print(
+                    red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                    magenta(" Captcha Bot") +
+                    red(f" 401: Unauthorized! ⚠️")
+                )
         except (KeyError, json.JSONDecodeError) as e:
             print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-                magenta(f"[{tokentype}]") +
-                red(f"Error while checking captcha! ⚠️")
+                magenta(f" [{tokentype}]") +
+                red(f" Error while checking captcha! ⚠️")
             )
-            catpcha_recover()
-            time.sleep(2)
+            catpcha_recover(token, tokentype, channelid, dmchannelid, userid)
             break
         time.sleep(0.5)
 #========================================================================================================================
@@ -1900,14 +1924,14 @@ def dmprotectprouwu(token, channelid, tokentype):
 #========================================================================================================================
 def main_account():
     bot_main_thread = threading.Thread(target=bot_main)
-    run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(main_token, "Main Token", main_channelid))
+    run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(main_token, "Main Token", main_channelid, main_serverid))
     run__bot__animal_thread = threading.Thread(target=run__bot__animal, args=(main_token, "Main Token", main_channelid, ani_type))
     run__bot__say__owo_thread = threading.Thread(target=run__bot__say__owo, args=(main_token, "Main Token", main_channelid))
     run__bot__pray_thread = threading.Thread(target=run__bot__pray, args=(main_token, "Main Token", main_channelid, pray))
     run__bot__curse_thread = threading.Thread(target=run__bot__curse, args=(main_token, "Main Token", main_channelid, curse))
     run__bot__upgrade_thread = threading.Thread(target=run__bot__upgrade, args=(main_token, "Main Token", main_channelid))
     run__bot__gamble_thread = threading.Thread(target=run__bot__gamble, args=(main_token, "Main Token", main_channelid))
-    run__bot__getquests_thread = threading.Thread(target=getquests, args=(main_token, extra_token, main_id, main_questchannelid, "Main Token"))
+    run__bot__getquests_thread = threading.Thread(target=getquests, args=(main_token, extra_token, main_id, main_questchannelid, "Main Token", main_serverid))
     bot_main_thread.start()
     time.sleep(10)
     if autoquest:
@@ -1930,14 +1954,14 @@ def extra_account():
         bot_extra_thread.start()
         time.sleep(10)
         if etoken:
-            extra__run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(extra_token, "Extra Token", extra_channelid))
+            extra__run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(extra_token, "Extra Token", extra_channelid, extra_serverid))
             extra__run__bot__animal_thread = threading.Thread(target=run__bot__animal, args=(extra_token, "Extra Token", extra_channelid, ani_type))
             extra__run__bot__say__owo_thread = threading.Thread(target=run__bot__say__owo, args=(extra_token, "Extra Token", extra_channelid))
             extra__run__bot__pray_thread = threading.Thread(target=run__bot__pray, args=(extra_token, "Extra Token", extra_channelid, pray))
             extra__run__bot__curse_thread = threading.Thread(target=run__bot__curse, args=(extra_token, "Extra Token", extra_channelid, curse))
             extra__run__bot__upgrade_thread = threading.Thread(target=run__bot__upgrade, args=(extra_token, "Extra Token", extra_channelid))
             extra__run__bot__gamble_thread = threading.Thread(target=run__bot__gamble, args=(extra_token, "Extra Token", extra_channelid))
-            extra__run__bot__getquests_thread = threading.Thread(target=getquests, args=(extra_token, main_token, extra_id, extra_questchannelid, "Extra Token"))
+            extra__run__bot__getquests_thread = threading.Thread(target=getquests, args=(extra_token, main_token, extra_id, extra_questchannelid, "Extra Token", extra_serverid))
             if autoquest:
                 extra__run__bot__getquests_thread.start() 
             extra__run__bot__say__owo_thread.start()
@@ -1951,7 +1975,13 @@ def extra_account():
             extra__run__bot__gamble_thread.start()
 
 def controller_recover(token, channelid, userid):
+    time.sleep(2)
     print("controller has been fixed")
+    print(
+        red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+        magenta("Controller Bot") +
+        green(f"Control has been fixed! ⚠️")
+    )
     controller_thread1 = threading.Thread(target=controller, args=(token, channelid, userid))
     controller_thread1.start()
 
@@ -1987,74 +2017,84 @@ def controller(token, channelid, userid):
             f"https://discord.com/api/v9/channels/{channelid}/messages?limit=5",
             headers={"authorization": token},
             ) 
-        try:
-            body = response.json()
-            with open(file_cache, 'r', encoding='utf-8') as u:
-                data = json.load(u)
-                u.close()
-            for bodycount in body:
+        if response.status_code == 200:
+            try:
+                body = response.json()
+                with open(file_cache, 'r', encoding='utf-8') as u:
+                    data = json.load(u)
+                    u.close()
+                for bodycount in body:
 
-                id = bodycount["author"]["id"]
-                id_bot_message = bodycount["id"]
-                if (((id == main_id) or (id == extra_id)) and
-                    (read_id(id_bot_message))):
-                    content = bodycount["content"]
-                    n = 0
-                    for bodycounts in body:
-                        n += 1
-                        ns = str(n)
-                        data[userid]["id_activate"][f"id_{ns}"] = bodycounts["id"]
-                        with open(file_cache, "w", encoding="utf-8") as g:
-                            json.dump(data, g, indent=4)
-                            g.close()
-                    if (content == f"{bot_prefix}stop"):
-                        if task_bot_active:
-                            active_bot = False
-                            task_bot_active = False
+                    id = bodycount["author"]["id"]
+                    id_bot_message = bodycount["id"]
+                    if (((id == main_id) or (id == extra_id)) and
+                        (read_id(id_bot_message))):
+                        content = bodycount["content"]
+                        n = 0
+                        for bodycounts in body:
+                            n += 1
+                            ns = str(n)
+                            data[userid]["id_activate"][f"id_{ns}"] = bodycounts["id"]
+                            with open(file_cache, "w", encoding="utf-8") as g:
+                                json.dump(data, g, indent=4)
+                                g.close()
+                        if (content == f"{bot_prefix}stop"):
+                            if task_bot_active:
+                                active_bot = False
+                                task_bot_active = False
+                                
+                                main_thread.kill()
+                                extra_thread.kill()
+                                time.sleep(2)
+                                send_mess('Bot stopped!')
+                            else:
+                                send_mess('Bot already stopped!')
+                        elif (content == f"{bot_prefix}run"):
+                            if  not task_bot_active:
+                                main_thread = multiprocessing.Process(target=main_account)
+                                extra_thread = multiprocessing.Process(target=extra_account)
+
+                                main_thread.start()
+                                extra_thread.start()
+                                captcha_notification = False
+                                task_bot_active = True
+                                capcha_flag = False
+                                active_bot = True
+                                time.sleep(2)
+                                send_mess('Bot is Runing!')
+                            else:
+                                send_mess('Bot has already runned!')
+                        elif (content == f"{bot_prefix}reset"):
                             
-                            main_thread.kill()
-                            extra_thread.kill()
-                            time.sleep(2)
-                            send_mess('Bot stopped!')
-                        else:
-                            send_mess('Bot already stopped!')
-                    elif (content == f"{bot_prefix}run"):
-                        if  not task_bot_active:
+                            captcha_notification = False
+                            task_bot_active = True
+                            capcha_flag = False
+                            active_bot = True
+                            if active_bot:
+                                main_thread.kill()
+                                extra_thread.kill()
+                            time.sleep(1)
                             main_thread = multiprocessing.Process(target=main_account)
                             extra_thread = multiprocessing.Process(target=extra_account)
 
                             main_thread.start()
                             extra_thread.start()
-                            captcha_notification = False
-                            task_bot_active = True
-                            capcha_flag = False
-                            active_bot = True
                             time.sleep(2)
-                            send_mess('Bot is Runing!')
-                        else:
-                            send_mess('Bot has already runned!')
-                    elif (content == f"{bot_prefix}reset"):
-                        
-                        captcha_notification = False
-                        task_bot_active = True
-                        capcha_flag = False
-                        active_bot = True
-                        if active_bot:
-                            main_thread.kill()
-                            extra_thread.kill()
-                        time.sleep(1)
-                        main_thread = multiprocessing.Process(target=main_account)
-                        extra_thread = multiprocessing.Process(target=extra_account)
-
-                        main_thread.start()
-                        extra_thread.start()
-                        time.sleep(2)
-                        send_mess('Bot resetted!')
-        except json.JSONDecodeError as e:
-            print("controller is went wrong")
-            controller_recover(token, channelid, userid)
-            time.sleep(2)
-            break
+                            send_mess('Bot resetted!')
+            except json.JSONDecodeError as e:
+                print(
+                red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                magenta("Controller Bot") +
+                red(f" Error while Control! ⚠️")
+                )
+                controller_recover(token, channelid, userid)
+                break
+        elif response.status_code == 401:
+            print(
+                red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                magenta(" Controller Bot") +
+                red(f" 401: Unauthorized! ⚠️")
+            )
         time.sleep(0.5)
 
 if __name__ == '__main__':
