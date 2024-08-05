@@ -148,7 +148,7 @@ captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
 
-version = "v1-0.2.e030e4b1"
+version = "v1-0.2.e04c023a"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
@@ -261,11 +261,11 @@ def notification_def(tokentype):
                     red(f" Time left {noti_count} Min! ⚠️")
                 )
                 notification.send()
-                time.sleep(60)
+                time.sleep(3)
                 os._exit(0)
         else:
             break
-        time.sleep(10)
+        time.sleep(60)
 #========================================================================================================================
 def rantime():
     rdt = random.randint(1, 5) + round(random.uniform(0, 1), 3)
