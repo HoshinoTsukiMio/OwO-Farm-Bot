@@ -148,7 +148,7 @@ captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
 
-version = "v1-0.2.e04c023a"
+version = "v1-0.2.e04c023b"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
@@ -1904,7 +1904,9 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                     captcha_chat = bodycount["id"]
                     #(idowo == "408785106942164992") and 
                     if ((("captcha" in content) or 
-                        (f"⚠️ **|** <@{userid}>" in content)) and 
+                        (f"⚠️ **|** <@{userid}>" in content) or
+                        (f"⚠️ **|**" in content)
+                        ) and 
                         (read_id(captcha_chat)) and 
                         (capcha_flag == False)):
                         for bodycounts in body:
@@ -2120,6 +2122,7 @@ if __name__ == '__main__':
     main_thread.start()
     time.sleep(0.1)
     extra_thread.start()
+    time.sleep(2)
     run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(main_token, "Main Token", main_channelid, main_dmchannelid, main_id))
     controller_thread1 = threading.Thread(target=controller, args=(main_token, main_channelid, main_id))
     run__bot__captcha_thread.start()
