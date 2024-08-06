@@ -139,16 +139,16 @@ notification = Notify()
 process = psutil.Process()
 quest = True
 etoken = False
+mtoken = False
 pray_curse = True
 battle_hunt = True
 active_bot = True
-capcha_flag = False
 task_bot_active = True
 captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
 
-version = "v1-0.2.bcc0ccf6"
+version = "v1-0.2.5fe6d38b849b"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
@@ -1666,9 +1666,11 @@ def getquests(tokenst,tokenrd,useridst,channelid, tokentype, serverid):
 #██╔══██╗██║░░░██║██║╚████║  ██╔══██╗██║░░██║░░░██║░░░
 #██║░░██║╚██████╔╝██║░╚███║  ██████╦╝╚█████╔╝░░░██║░░░
 #╚═╝░░╚═╝░╚═════╝░╚═╝░░╚══╝  ╚═════╝░░╚════╝░░░░╚═╝░░░
-def bot_main():
+def bot_main(varq1):
     add_user(main_id)
-    time.sleep(2)
+    global mtoken
+    mtoken = True
+    varq1.put(mtoken)
     response = requests.get(
             f"https://canary.discord.com/api/v9/users/@me",
             headers={"authorization": main_token}
@@ -1676,26 +1678,26 @@ def bot_main():
     try:
             body = response.json()
             if (str(body) == "401: Unauthorized"):
-                    print(red(f"Main Token / {str(body)}"))
+                    print(red(f"Main  Token / {str(body)}"))
                     time.sleep(5)
                     exit(0)
             else:
                 print(blue(f"[Main  Token] User:{body["username"]}{body["discriminator"]}"))
-                checklist(main_token, "Main Token", main_channelid, main_id)
-                print(green("Main Token ✅"))
+                checklist(main_token, "Main  Token", main_channelid, main_id)
+                print(green("Main  Token ✅"))
     except (KeyError, json.JSONDecodeError) as e:
             print(
                 red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
                 magenta("[Main  Token]") +
-                red(f"Error while checking Main Token! ⚠️")
+                red(f"Error while checking Main  Token! ⚠️")
             )
 #========================================================================================================================
-def bot_extra():
-    global etoken
+def bot_extra(varq2):
     if extratokencheck:
-        add_user(extra_id)
-        time.sleep(2)
+        global etoken
         etoken = True
+        varq2.put(etoken)
+        add_user(extra_id)
         response = requests.get(
             f"https://canary.discord.com/api/v9/users/@me",
             headers={"authorization": extra_token}
@@ -1839,24 +1841,7 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
             data[userid]["id_captcha"] = {f"id_{i+1}": v for i, v in enumerate(id_list)}
             with open(file_cache, 'w') as write_data:
                 json.dump(data, write_data, indent=4)
-                write_data.close
-    def captcha_def():
-        global active_bot, capcha_flag, task_bot_active, captcha_notification, main_thread, extra_thread
-        print(
-            red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
-            magenta(f"[{tokentype}] ") +
-            red(f"Chat Captcha! ❌")
-        )
-        active_bot = False
-        task_bot_active = False
-        captcha_notification = True
-        capcha_flag = True
-        main_thread.kill()
-        extra_thread.kill()
-        time.sleep(0.001)
-        notification_bot = threading.Thread(target=notification_def, args=(tokentype,),)
-        notification_bot.start()
-    
+                write_data.close    
     def read_id(id_to_check):
         with open(file_cache, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -1870,7 +1855,9 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
         return True
 
     while True:
-        global capcha_flag
+        global active_bot, task_bot_active, captcha_notification, main_thread, extra_thread, etoken, mtoken
+        #print(f"Captcha {tokentype} \nextratoken:{etoken} \nmaintoken:{mtoken}")
+        
         try: 
             response = requests.get(
                 f"https://discord.com/api/v9/channels/{channelid}/messages?limit=10",
@@ -1890,14 +1877,27 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                 captcha_md= bodydm[0]["id"]
                 contentmd = bodydm[0]["content"]
                 if  (("Are you a real human?" in  contentmd) and 
-                    (captcha_md != id_captcha_dm) and 
-                    (capcha_flag == False)):
+                    (captcha_md != id_captcha_dm)):
                     data[userid]["id_captcha_dm"] = captcha_md
                     with open(file_cache, "w", encoding="utf-8") as write_id_dm:
                         json.dump(data, write_id_dm, indent=4)
                         write_id_dm.close()
-                    stop_bot = threading.Thread(target=captcha_def)
-                    stop_bot.start()
+                    print(
+                        red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                        magenta(f"[{tokentype}] ") +
+                        red(f"Chat Captcha! ❌")
+                    )
+                    active_bot = False
+                    task_bot_active = False
+                    captcha_notification = True
+                    if main_thread.is_alive():
+                        main_thread.kill()
+                    if extra_thread.is_alive():
+                        extra_thread.kill()
+                    time.sleep(0.001)
+                    notification_bot = threading.Thread(target=notification_def, args=(tokentype,),name=(f"notification_{tokentype}",))
+                    notification_bot.start()
+                    notification_bot.join()
                 body = response.json()
                 for bodycount in body:
                     content = bodycount["content"]
@@ -1905,11 +1905,23 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                     captcha_chat = bodycount["id"]
                     #(idowo == "408785106942164992") and 
                     if ((("captcha" in content) or (f"⚠️ **|** <@{userid}>" in content) or (f"⚠️ **|**" in content)) and 
-                        (read_id(captcha_chat)) and 
-                        (capcha_flag == False)):
-                        stop_bot = threading.Thread(target=captcha_def)
-                        stop_bot.start()
-
+                        (read_id(captcha_chat))):
+                        print(
+                            red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
+                            magenta(f"[{tokentype}] ") +
+                            red(f"Chat Captcha! ❌")
+                        )
+                        active_bot = False
+                        task_bot_active = False
+                        captcha_notification = True
+                        if main_thread.is_alive():
+                            main_thread.kill()
+                        if extra_thread.is_alive():
+                            extra_thread.kill()
+                        time.sleep(0.001)
+                        notification_bot = threading.Thread(target=notification_def, args=(tokentype,),name=(f"notification_{tokentype}",))
+                        notification_bot.start()
+                        notification_bot.join()
                         for bodycounts in body:
                             add_id_to_quest_battle(bodycounts["id"])
             elif ((response.status_code == 401) or responsedm.status_code == 401):
@@ -1947,35 +1959,37 @@ def dmprotectprouwu(token, channelid, tokentype):
             red(" OwO dm channel id incorrect ❌ ")
         )
 #========================================================================================================================
-def main_account():
-    bot_main_thread = threading.Thread(target=bot_main)
-    run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(main_token, "Main Token", main_channelid, main_serverid))
-    run__bot__animal_thread = threading.Thread(target=run__bot__animal, args=(main_token, "Main Token", main_channelid, ani_type))
-    run__bot__say__owo_thread = threading.Thread(target=run__bot__say__owo, args=(main_token, "Main Token", main_channelid))
-    run__bot__pray_thread = threading.Thread(target=run__bot__pray, args=(main_token, "Main Token", main_channelid, pray))
-    run__bot__curse_thread = threading.Thread(target=run__bot__curse, args=(main_token, "Main Token", main_channelid, curse))
-    run__bot__upgrade_thread = threading.Thread(target=run__bot__upgrade, args=(main_token, "Main Token", main_channelid))
-    run__bot__gamble_thread = threading.Thread(target=run__bot__gamble, args=(main_token, "Main Token", main_channelid))
-    run__bot__getquests_thread = threading.Thread(target=getquests, args=(main_token, extra_token, main_id, main_questchannelid, "Main Token", main_serverid))
+def main_account(varq1):
+    global mtoken
+    bot_main_thread = threading.Thread(target=bot_main,args=(varq1,))
     bot_main_thread.start()
     time.sleep(10)
-    if autoquest:
-        time.sleep(2)
-        run__bot__getquests_thread.start() 
-    run__bot__say__owo_thread.start()
-    run__bot__hunt__and__battle_thread.start()
-    time.sleep(5)
-    run__bot__pray_thread.start()
-    run__bot__curse_thread.start()
-    time.sleep(5)
-    run__bot__upgrade_thread.start()
-    run__bot__gamble_thread.start()
-    run__bot__animal_thread.start()
+    if mtoken:
+        run__bot__hunt__and__battle_thread = threading.Thread(target=run__bot__hunt__and__battle, args=(main_token, "Main  Token", main_channelid, main_serverid))
+        run__bot__animal_thread = threading.Thread(target=run__bot__animal, args=(main_token, "Main  Token", main_channelid, ani_type))
+        run__bot__say__owo_thread = threading.Thread(target=run__bot__say__owo, args=(main_token, "Main  Token", main_channelid))
+        run__bot__pray_thread = threading.Thread(target=run__bot__pray, args=(main_token, "Main  Token", main_channelid, pray))
+        run__bot__curse_thread = threading.Thread(target=run__bot__curse, args=(main_token, "Main  Token", main_channelid, curse))
+        run__bot__upgrade_thread = threading.Thread(target=run__bot__upgrade, args=(main_token, "Main  Token", main_channelid))
+        run__bot__gamble_thread = threading.Thread(target=run__bot__gamble, args=(main_token, "Main  Token", main_channelid))
+        run__bot__getquests_thread = threading.Thread(target=getquests, args=(main_token, extra_token, main_id, main_questchannelid, "Main  Token", main_serverid))
+        if autoquest:
+            time.sleep(2)
+            run__bot__getquests_thread.start() 
+        run__bot__say__owo_thread.start()
+        run__bot__hunt__and__battle_thread.start()
+        time.sleep(5)
+        run__bot__pray_thread.start()
+        run__bot__curse_thread.start()
+        time.sleep(5)
+        run__bot__upgrade_thread.start()
+        run__bot__gamble_thread.start()
+        run__bot__animal_thread.start()
 
-def extra_account():
+def extra_account(varq2):
     global etoken
     if extratokencheck:
-        bot_extra_thread = threading.Thread(target=bot_extra)
+        bot_extra_thread = threading.Thread(target=bot_extra, args=(varq2,))
         bot_extra_thread.start()
         time.sleep(10)
         if etoken:
@@ -2049,7 +2063,7 @@ def controller(token, channelid, userid):
                 return False
         return True
     while True:
-        global task_bot_active, active_bot, captcha_notification , main_thread, extra_thread, capcha_flag
+        global task_bot_active, active_bot, captcha_notification , main_thread, extra_thread, varq1, varq2
         response = requests.get(
             f"https://discord.com/api/v9/channels/{channelid}/messages?limit=10",
             headers={"authorization": token},
@@ -2071,8 +2085,10 @@ def controller(token, channelid, userid):
                                 active_bot = False
                                 task_bot_active = False
                                 
-                                main_thread.kill()
-                                extra_thread.kill()
+                                if main_thread.is_alive():
+                                    main_thread.kill()
+                                if extra_thread.is_alive():
+                                    extra_thread.kill()
                                 time.sleep(2)
                                 send_mess('Bot stopped!')
                             else:
@@ -2081,15 +2097,14 @@ def controller(token, channelid, userid):
                             if  not task_bot_active:
                                 for bodycounts in body:
                                     add_id_to_quest_battle(bodycounts["id"])
-                                main_thread = multiprocessing.Process(target=main_account)
-                                extra_thread = multiprocessing.Process(target=extra_account)
+                                main_thread = multiprocessing.Process(target=main_account, args=(varq1,))
+                                extra_thread = multiprocessing.Process(target=extra_account, args=(varq2,))
 
                                 main_thread.start()
                                 extra_thread.start()
                                 captcha_notification = False
                                 
                                 task_bot_active = True
-                                capcha_flag = False
                                 active_bot = True
                                 time.sleep(2)
                                 send_mess('Bot is Runing!')
@@ -2112,19 +2127,23 @@ def controller(token, channelid, userid):
         time.sleep(0.5)
 
 if __name__ == '__main__':
+    varq1 = multiprocessing.Queue()
+    varq2 = multiprocessing.Queue()
     checkversion()
     install_update()
-    main_thread = multiprocessing.Process(target=main_account)
-    extra_thread = multiprocessing.Process(target=extra_account)
+    main_thread = multiprocessing.Process(target=main_account, args=(varq1,))
+    extra_thread = multiprocessing.Process(target=extra_account, args=(varq2,))
     main_thread.start()
     time.sleep(0.1)
     extra_thread.start()
-    time.sleep(2)
-    run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(main_token, "Main Token", main_channelid, main_dmchannelid, main_id))
-    controller_thread1 = threading.Thread(target=controller, args=(main_token, main_channelid, main_id))
-    run__bot__captcha_thread.start()
-    controller_thread1.start()
-
+    time.sleep(4)
+    mtoken = varq1.get()
+    if mtoken:
+        run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(main_token, "Main  Token", main_channelid, main_dmchannelid, main_id))
+        controller_thread1 = threading.Thread(target=controller, args=(main_token, main_channelid, main_id))
+        run__bot__captcha_thread.start()
+        controller_thread1.start()
+    etoken = varq2.get()
     if etoken:
         extra__run__bot__captcha_thread = threading.Thread(target=run__bot__captcha, args=(extra_token, "Extra Token", extra_channelid, extra_dmchannelid, extra_id))
         controller_thread2 = threading.Thread(target=controller, args=(extra_token, extra_channelid, extra_id))
