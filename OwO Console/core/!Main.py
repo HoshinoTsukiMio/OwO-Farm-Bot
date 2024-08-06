@@ -1,3 +1,4 @@
+version = "v1-0.2.0e6a78e27695"
 import json, math, random, os, time, hashlib, threading, multiprocessing, datetime, base64, json, math, random, os, time, hashlib, threading, datetime
 from file import phrases, actvar, gamblevar
 try:
@@ -147,8 +148,6 @@ task_bot_active = True
 captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
-
-version = "v1-0.2.5fe6d38b849b"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
@@ -1919,11 +1918,11 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                         if extra_thread.is_alive():
                             extra_thread.kill()
                         time.sleep(0.001)
+                        for bodycounts in body:
+                            add_id_to_quest_battle(bodycounts["id"])
                         notification_bot = threading.Thread(target=notification_def, args=(tokentype,),name=(f"notification_{tokentype}",))
                         notification_bot.start()
                         notification_bot.join()
-                        for bodycounts in body:
-                            add_id_to_quest_battle(bodycounts["id"])
             elif ((response.status_code == 401) or responsedm.status_code == 401):
                 print(
                     red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
