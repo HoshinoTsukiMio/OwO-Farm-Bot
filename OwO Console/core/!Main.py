@@ -1903,10 +1903,7 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                     idowo = bodycount["author"]["id"]
                     captcha_chat = bodycount["id"]
                     #(idowo == "408785106942164992") and 
-                    if ((("captcha" in content) or 
-                        (f"⚠️ **|** <@{userid}>" in content) or
-                        (f"⚠️ **|**" in content)
-                        ) and 
+                    if ((("captcha" in content) or (f"⚠️ **|** <@{userid}>" in content) or (f"⚠️ **|**" in content)) and 
                         (read_id(captcha_chat)) and 
                         (capcha_flag == False)):
                         for bodycounts in body:
@@ -2113,12 +2110,10 @@ def controller(token, channelid, userid):
         time.sleep(0.5)
 
 if __name__ == '__main__':
-
     checkversion()
     install_update()
     main_thread = multiprocessing.Process(target=main_account)
     extra_thread = multiprocessing.Process(target=extra_account)
-
     main_thread.start()
     time.sleep(0.1)
     extra_thread.start()
