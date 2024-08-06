@@ -148,7 +148,7 @@ captcha_notification = False
 if (extra_token == main_token):
     extratokencheck = False
 
-version = "v1-0.2.e04c023b"
+version = "v1-0.2.bcc0ccf6"
 
 """███╗░░░███╗░█████╗░██╗███╗░░██╗  ██████╗░███████╗███████╗
    ████╗░████║██╔══██╗██║████╗░██║  ██╔══██╗██╔════╝██╔════╝
@@ -1854,7 +1854,8 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
         main_thread.kill()
         extra_thread.kill()
         time.sleep(0.001)
-        notification_def(tokentype)
+        notification_bot = threading.Thread(target=notification_def, args=(tokentype,),)
+        notification_bot.start()
     
     def read_id(id_to_check):
         with open(file_cache, 'r', encoding='utf-8') as f:
@@ -1895,8 +1896,8 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                     with open(file_cache, "w", encoding="utf-8") as write_id_dm:
                         json.dump(data, write_id_dm, indent=4)
                         write_id_dm.close()
-                    captcha_def()
-                    
+                    stop_bot = threading.Thread(target=captcha_def)
+                    stop_bot.start()
                 body = response.json()
                 for bodycount in body:
                     content = bodycount["content"]
@@ -1906,10 +1907,11 @@ def run__bot__captcha(token, tokentype, channelid, dmchannelid, userid):
                     if ((("captcha" in content) or (f"⚠️ **|** <@{userid}>" in content) or (f"⚠️ **|**" in content)) and 
                         (read_id(captcha_chat)) and 
                         (capcha_flag == False)):
+                        stop_bot = threading.Thread(target=captcha_def)
+                        stop_bot.start()
+
                         for bodycounts in body:
                             add_id_to_quest_battle(bodycounts["id"])
-                        captcha_def()
-                        break
             elif ((response.status_code == 401) or responsedm.status_code == 401):
                 print(
                     red(f"{datetime.datetime.now().strftime('%H:%M:%S')} ") +
