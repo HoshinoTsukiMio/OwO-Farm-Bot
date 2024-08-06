@@ -1359,7 +1359,7 @@ def doquest(questss,tokenst,tokenrd,useridst,channelid,progress1,progress2, serv
                     args=(
                         tokenst, 
                         tokenrd,
-                        main_id,
+                        extra_id,
                         channelid,
                         int(progress1),
                         int(progress2),
