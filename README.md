@@ -22,6 +22,7 @@
 
 ## 👑・Features
 -   Can control bot to run or stop
+-   Multi account farm (2 account per group)
 -   Auto Hunt (slash command)
 -   Auto Battle (slash command)
 -   Inventory Check
@@ -39,11 +40,35 @@
 -   Auto CheckList
     -   Auto Daily
     -   Auto Cookie
--   Captcha Protection v1.0.0 
+-   Captcha Protection v2.0.0 
 -   **Extra Token**
     -   All Main Token Features
 
 ## ⚙・setting example
+- all groups are not sync together, maintoken and extratoken in 1 group will do quest not do for other group
+- you can extend new group by add group
+```
+    "group_n":{
+        "main":{
+            "note": "note what you want :P",
+            "token":"main token",
+            "serverid": "id ur server main", 
+            "channelid":"channel id for main token",
+            "dmchannelid":"owo bot dm channel id",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"main token owo bot dm channel id"
+        },
+        "extra":{
+            "note": "note what you want :P",
+            "token":"extra token",
+            "serverid": "id ur server extra", 
+            "channelid":"channel id for extra token",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"extra token owo bot dm channel id"
+        }
+    }
+```
+- this is example of setting
 
 ```
 {
@@ -102,22 +127,63 @@
                 "amount": "any amount"
             }
         }
+    }
+    "group_1":{
+        "main":{
+            "note": "note what you want :P",
+            "token":"main token",
+            "serverid": "id ur server main", 
+            "channelid":"channel id for main token",
+            "dmchannelid":"owo bot dm channel id",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"main token owo bot dm channel id"
+        },
+        "extra":{
+            "note": "note what you want :P",
+            "token":"extra token",
+            "serverid": "id ur server extra", 
+            "channelid":"channel id for extra token",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"extra token owo bot dm channel id"
+        }
     },
-    "main":{
-        "note": "",note what you want :P
-        "token":"main token",
-        "serverid": "", id ur server main
-        "channelid":"channel id for main token",
-        "dmchannelid":"owo bot dm channel id",
-        "questchannelid": "auto quest channel id",
-        "owo_dmschannelid":"main token owo bot dm channel id",
+    "group_2":{
+        "main":{
+            "note": "note what you want :P",
+            "token":"main token",
+            "serverid": "id ur server main", 
+            "channelid":"channel id for main token",
+            "dmchannelid":"owo bot dm channel id",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"main token owo bot dm channel id"
+        },
+        "extra":{
+            "note": "note what you want :P",
+            "token":"extra token",
+            "serverid": "id ur server extra", 
+            "channelid":"channel id for extra token",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"extra token owo bot dm channel id"
+        }
     },
-    "extra":{
-        "token":"extra token",
-        "serverid": "", id ur server extra
-        "channelid":"channel id for extra token",
-        "questchannelid": "auto quest channel id",
-        "owo_dmschannelid":"extra token owo bot dm channel id",
+    "group_3":{
+        "main":{
+            "note": "note what you want :P",
+            "token":"main token",
+            "serverid": "id ur server main", 
+            "channelid":"channel id for main token",
+            "dmchannelid":"owo bot dm channel id",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"main token owo bot dm channel id"
+        },
+        "extra":{
+            "note": "note what you want :P",
+            "token":"extra token",
+            "serverid": "id ur server extra", 
+            "channelid":"channel id for extra token",
+            "questchannelid": "auto quest channel id",
+            "owo_dmschannelid":"extra token owo bot dm channel id"
+        }
     }
 }
 ```
@@ -168,6 +234,7 @@ m)
 ```
 > YOU NEED LATEST PYTHON !
 > edit setting_config.json it in data folder
+> ⚠DO NOT RUN ANY FILE .bat WITH ADMINISTRATOR⚠
 > run "! Install Virtual Enviroment.bat" to set up Virtual Enviroment
 > then you can run "! Run Bot.bat" to start bot
 > enjoy and dont forget to update id it has a new version
