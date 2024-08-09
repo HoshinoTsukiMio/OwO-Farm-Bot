@@ -1,5 +1,5 @@
 <br>
-<h1 align="center">OwO Farm Bot v1-0.2.e030e4b1 </h1>
+<h1 align="center">OwO Farm Bot v2-0.1.6806951a45f5 </h1>
 
 </p>
 
