@@ -2290,7 +2290,6 @@ class API():
                             time.sleep(0.001)
                             for bodycounts in body:
                                 self.add_id_to_cache(bodycounts["id"], userid, "id_captcha")
-                                print(bodycounts["id"])
                             notification_bot = threading.Thread(
                                 target=self.notification_def, 
                                 args=(username,),
