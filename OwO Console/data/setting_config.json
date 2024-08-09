@@ -1,5 +1,6 @@
 {
     "settings": {
+        "number_of_groups": 1,
         "owo_prefix": "owo",
         "control_prefix": "!",
         "slash_command": true,
@@ -11,18 +12,19 @@
         "autoquest": true,
         "randommess": true,
         "banbypass": true,
-        "extratoken": false,
+        "extratoken": true,
         "inventory": {
             "inventorycheck": true,
             "gemcheck": true,
             "lootboxcheck": true,
             "fabledlootboxcheck": true,
-            "cratecheck": true
+            "cratecheck": false
         },
         "animals": {
             "enable": true,
-            "type": "sac",
+            "type": "sell",
             "animaltype": {
+                "all": true,
                 "common": true,
                 "uncommon": true,
                 "rare": true,
@@ -54,20 +56,58 @@
             }
         }
     },
-    "main": {
-        "note": "",
-        "token": "",
-        "serverid": "",
-        "channelid": "",
-        "questchannelid": "",
-        "owo_dmschannelid": ""
+    "group_1":{
+        "main": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        },
+        "extra": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        }
     },
-    "extra": {
-        "note": "",
-        "token": "",
-        "serverid": "",
-        "channelid": "",
-        "questchannelid": "",
-        "owo_dmschannelid": ""
+    "group_2,":{
+        "main": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        },
+        "extra": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        }
+    },
+    "group_3,":{
+        "main": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        },
+        "extra": {
+            "note": "",
+            "token": "",
+            "serverid": "",
+            "channelid": "",
+            "questchannelid": "",
+            "owo_dmschannelid": ""
+        }
     }
 }
