@@ -46,6 +46,7 @@
 
 ## ⚙・setting example
 - all groups are not sync together, maintoken and extratoken in 1 group will do quest not do for other group
+- bot is base on group account not how many account
 - you can extend new group by add group
 ```
     "group_n":{
