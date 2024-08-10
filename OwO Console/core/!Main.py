@@ -1524,7 +1524,7 @@ class API():
             quests = "owo"
         elif "Gamble" in quest:
             quests = "Gamble"
-        elif "1Use an action command on someone" in quest:
+        elif "Use an action command on someone" in quest:
             quests = "action give"
         elif "Battle with a friend" in quest:
             quests = "Battle"
