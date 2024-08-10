@@ -1014,7 +1014,7 @@ class API():
                 gem += f" {specialgem}"
                 gemusebro = True
             if gemusebro:
-                self.gemuse(token, gem, channelid, tokentype)
+                self.gemuse(token, gem, channelid, group, tokentype)
 
         if lootboxcheck:
             if "`050`" in cont:
