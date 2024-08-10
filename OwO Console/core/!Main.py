@@ -1,4 +1,4 @@
-version = "v2-0.1.6806951a45f5"
+version = "v2-0.1.99a07a7461b8"
 import multiprocessing.queues
 import json, math, random, os, time, hashlib, threading, multiprocessing, datetime, base64, json, math, random, os, time, hashlib, threading, datetime
 from file import phrases, actvar, gamblevar
@@ -260,6 +260,7 @@ class API():
     def read_id(self, id_to_check,userid, path):
         with open(file_cache, 'r', encoding='utf-8') as f:
             data = json.load(f)
+            f.close()
 
         # Truy cập id_captcha bên trong dictionary cache
         id_captcha = data[userid][path]
@@ -2578,25 +2579,26 @@ class API():
                                   (not self.task_bot_active)):
                                     for bodycounts in body:
                                         self.add_id_to_cache(bodycounts["id"], userid, "id_activate")
-                                    self.main_thread = multiprocessing.Process(target=self._main_)
-                                    self.main_thread.start()
+                                    
                                     self.captcha_notification = False
                                     self.task_bot_active = True
                                     self.active_bot = True
+                                    self.main_thread = multiprocessing.Process(target=self._main_)
+                                    self.main_thread.start()
                                     send_mess('Bot is Runing!')
                             elif (content == f"{bot_prefix}reset"):
-                                for bodycounts in body:
-                                    self.add_id_to_cache(bodycounts["id"], userid, "id_activate")
                                 self.active_bot = False
                                 self.task_bot_active = False
+                                for bodycounts in body:
+                                    self.add_id_to_cache(bodycounts["id"], userid, "id_activate")
                                 if self.main_thread.is_alive():
                                     self.main_thread.kill()
-                                time.sleep(0.2)
-                                self.main_thread = multiprocessing.Process(target=self._main_)
-                                self.main_thread.start()
                                 self.captcha_notification = False
                                 self.task_bot_active = True
                                 self.active_bot = True
+                                time.sleep(0.2)
+                                self.main_thread = multiprocessing.Process(target=self._main_)
+                                self.main_thread.start()
                                 send_mess('Bot reseted!')
                 except json.JSONDecodeError as e:
                     print(e)
