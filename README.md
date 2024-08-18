@@ -193,7 +193,7 @@ m)
 ```
 ## 📍・Channel id
 
-![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/images/ID%20Server.png)
+![](https://raw.githubusercontent.com/HoshinoTsukiMio/OwO-Farm-Bot/main/images/ID%20Channel.png)
 
 ## 📍・Server id
 
