@@ -1,6 +1,5 @@
 {
     "settings": {
-        "number_of_groups": 1,
         "owo_prefix": "owo",
         "control_prefix": "!",
         "slash_command": true,
@@ -12,7 +11,6 @@
         "autoquest": true,
         "randommess": true,
         "banbypass": true,
-        "extratoken": true,
         "inventory": {
             "inventorycheck": true,
             "gemcheck": true,
@@ -48,15 +46,17 @@
         "gamble": {
             "coinflip": {
                 "enable": false,
-                "amount": "1"
+                "amount": 1
             },
             "slots": {
                 "enable": false,
-                "amount": "1"
+                "amount": 1
             }
         }
     },
     "group_1":{
+        "active": true,
+        "extratoken": false,
         "main": {
             "note": "",
             "token": "",
@@ -75,24 +75,8 @@
         }
     },
     "group_2":{
-        "main": {
-            "note": "",
-            "token": "",
-            "serverid": "",
-            "channelid": "",
-            "questchannelid": "",
-            "owo_dmschannelid": ""
-        },
-        "extra": {
-            "note": "",
-            "token": "",
-            "serverid": "",
-            "channelid": "",
-            "questchannelid": "",
-            "owo_dmschannelid": ""
-        }
-    },
-    "group_3":{
+        "active": false,
+        "extratoken": false,
         "main": {
             "note": "",
             "token": "",
