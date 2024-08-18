@@ -1,5 +1,5 @@
 <br>
-<h1 align="center">OwO Farm Bot v2-0.1.99a07a7461b8 </h1>
+<h1 align="center">OwO Farm Bot v3-0.1.fb3b77c087e7 </h1>
 
 </p>
 
@@ -16,12 +16,12 @@
 
 
 ## ❗・Important
--   You should use 2 account for access dual auto quest
+-   You should use 2 account in 1 group for access dual auto quest in that group
 -   Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. I am not responsible for them.
--   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.well
+-   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.
 
 ## 👑・Features
--   Can control bot to run or stop
+-   Can control bot to run or stop or reset (reset just restart not update setting)
 -   Multi account farm (2 account per group)
 -   Auto Hunt (slash command)
 -   Auto Battle (slash command)
@@ -40,7 +40,7 @@
 -   Auto CheckList
     -   Auto Daily
     -   Auto Cookie
--   Captcha Protection v2.0.0 
+-   Captcha Protection v3.0.0 
 -   **Extra Token**
     -   All Main Token Features
 
@@ -50,6 +50,8 @@
 - you can extend new group by add group
 ```
     "group_n":{
+        "active": false,
+        "extratoken": false,
         "main":{
             "note": "note what you want :P",
             "token":"main token",
@@ -85,7 +87,6 @@
         "autoquest": "true or false",
         "randommess": "true or false",
         "banbypass": "true or false",
-        "extratoken": "true or false",
         "inventory": {
             "inventorycheck": "true or false",
             "gemcheck": "true or false",
@@ -130,6 +131,8 @@
         }
     }
     "group_1":{
+        "active": true,
+        "extratoken": false,
         "main":{
             "note": "note what you want :P",
             "token":"main token",
@@ -149,6 +152,8 @@
         }
     },
     "group_2":{
+        "active": false,
+        "extratoken": false,
         "main":{
             "note": "note what you want :P",
             "token":"main token",
@@ -167,26 +172,8 @@
             "owo_dmschannelid":"extra token owo bot dm channel id"
         }
     },
-    "group_3":{
-        "main":{
-            "note": "note what you want :P",
-            "token":"main token",
-            "serverid": "id ur server main", 
-            "channelid":"channel id for main token",
-            "dmchannelid":"owo bot dm channel id",
-            "questchannelid": "auto quest channel id",
-            "owo_dmschannelid":"main token owo bot dm channel id"
-        },
-        "extra":{
-            "note": "note what you want :P",
-            "token":"extra token",
-            "serverid": "id ur server extra", 
-            "channelid":"channel id for extra token",
-            "questchannelid": "auto quest channel id",
-            "owo_dmschannelid":"extra token owo bot dm channel id"
-        }
-    }
 }
+
 ```
 
 ## 💎・Get Token
