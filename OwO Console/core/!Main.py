@@ -2926,7 +2926,7 @@ class ____API____:
                         time.sleep(0.001)
                         notification_bot = threading.Thread(
                             target=self.notification_def,
-                            args=(username,),
+                            args=(username, tokentype,),
                             name=(f"notification_{username}",),
                         )
                         notification_bot.start()
@@ -2980,7 +2980,7 @@ class ____API____:
                                 )
                             notification_bot = threading.Thread(
                                 target=self.notification_def,
-                                args=(username,),
+                                args=(username,tokentype,),
                                 name=(f"notification_{username}",),
                             )
                             notification_bot.start()
@@ -3200,7 +3200,7 @@ if __name__ == "__main__":
     time.sleep(2)
     while True:
         """keep alive"""
-        clear_screen()
+        #clear_screen()
         time.sleep(
             0.000000000000000000000000000000000000000000000000000000000000001
         )  # idk what i am doing lol
