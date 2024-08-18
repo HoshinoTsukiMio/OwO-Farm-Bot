@@ -1,6 +1,6 @@
 <br>
 <h1 align="center">OwO Farm Bot v3-0.1.fb3b77c087e7 </h1>
-
+<h1 align="center" style="color: #ffb8fe;">『🌸Hyper Fox🌸』💢 </h1>
 </p>
 
 [❗ ・Important](#important)<br>
