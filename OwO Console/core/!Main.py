@@ -14,7 +14,7 @@ from file import phrases, actvar, gamblevar
 start_time = time.time()
 request_count = 0
 
-version = "v3-0.1.fb3b77c087e7 "
+version = "v3-0.1.fb3b77c087e7"
 
 
 try:
