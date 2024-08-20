@@ -3117,7 +3117,7 @@ class ____API____:
                 else:
                     self.print_captcha_check_main = print_
                 break
-            time.sleep(1)
+            time.sleep(0.5)
 
     def ___MAIN___(self, data):
         self.extratokencheck = data["extratoken"]
