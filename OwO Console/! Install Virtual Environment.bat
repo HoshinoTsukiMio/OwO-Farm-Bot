@@ -1,6 +1,6 @@
 @echo off
 set "file_path=%~dp0"
-echo cd %file_path%
+cd %file_path%
 echo Creating virtual environment...
 python -m venv !venv
 echo Activating virtual environment...
